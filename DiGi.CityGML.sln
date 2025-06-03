@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.14.36127.28
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DiGi.CityGML", "DiGi.CityGML\DiGi.CityGML.csproj", "{38018D59-0F28-4209-8CCC-34E2AE768DD2}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DiGi.CityGML.Test", "DiGi.CityGML.Test\DiGi.CityGML.Test.csproj", "{8F0DB08D-9A93-41E4-89D4-5B2E09A582EE}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{38018D59-0F28-4209-8CCC-34E2AE768DD2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{38018D59-0F28-4209-8CCC-34E2AE768DD2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{38018D59-0F28-4209-8CCC-34E2AE768DD2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{38018D59-0F28-4209-8CCC-34E2AE768DD2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8F0DB08D-9A93-41E4-89D4-5B2E09A582EE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8F0DB08D-9A93-41E4-89D4-5B2E09A582EE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8F0DB08D-9A93-41E4-89D4-5B2E09A582EE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8F0DB08D-9A93-41E4-89D4-5B2E09A582EE}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {155E1885-9681-44D7-B11A-B45E9EFD40E1}
+	EndGlobalSection
+EndGlobal
