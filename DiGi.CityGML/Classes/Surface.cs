@@ -31,6 +31,13 @@ namespace DiGi.CityGML.Classes
             }
         }
 
-
+        [JsonIgnore]
+        public IPolygonalFace3D Geometry
+        {
+            get
+            {
+                return Core.Query.Clone(geometry);
+            }
+        }
     }
 }

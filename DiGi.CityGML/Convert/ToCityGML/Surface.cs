@@ -21,6 +21,10 @@ namespace DiGi.CityGML
             }
 
             string uniqueId = Query.UniqueId(xmlNode);
+            if(string.IsNullOrWhiteSpace(uniqueId) && xmlNode.ChildNodes != null && xmlNode.ChildNodes.Count != 0)
+            {
+                uniqueId = Query.UniqueId(xmlNode.ChildNodes[0]);
+            }
 
             switch(xmlNode.LocalName)
             {
@@ -32,9 +36,10 @@ namespace DiGi.CityGML
 
                 case Constans.XmlNode.Name.GroundSurface:
                     return new GroundSurface(uniqueId, polygonalFace3D);
-            }
 
-            return null;
+                default:
+                    return new UndefinedSurface(uniqueId, polygonalFace3D);
+            }
         }
     }
 }

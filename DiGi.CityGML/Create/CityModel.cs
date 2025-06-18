@@ -1,4 +1,5 @@
 ﻿using DiGi.CityGML.Classes;
+using DiGi.CityGML.Enums;
 using System.IO;
 using System.Xml;
 
@@ -6,21 +7,25 @@ namespace DiGi.CityGML
 {
     public static partial class Create
     {
-        public static CityModel CityModel(string path)
+        public static CityModel CityModel(Stream stream, LOD? lOD = null, int? year = null)
         {
-            if (string.IsNullOrWhiteSpace(path) || !System.IO.File.Exists(path))
-            {
-                return null;
-            }
-
-            string text = File.ReadAllText(path);
-            if (string.IsNullOrWhiteSpace(text))
+            if(stream == null)
             {
                 return null;
             }
 
             XmlDocument xmlDocument = new XmlDocument();
-            xmlDocument.LoadXml(text);
+            xmlDocument.Load(stream);
+
+            return CityModel(xmlDocument, lOD, year);
+        }
+
+        public static CityModel CityModel(XmlDocument xmlDocument, LOD? lOD = null, int? year = null)
+        {
+            if(xmlDocument == null)
+            {
+                return null;
+            }
 
             XmlNodeList xmlNodeList = xmlDocument.ChildNodes;
             if (xmlNodeList == null || xmlNodeList.Count == 0)
@@ -39,17 +44,51 @@ namespace DiGi.CityGML
                     continue;
                 }
 
-                if(name == Constans.XmlNode.Name.CityModel)
+                if (name == Constans.XmlNode.Name.CityModel)
                 {
                     result = Convert.ToCityGML_CityModel(xmlNodeList[i]);
-                    if(result != null)
+                    if (result != null)
                     {
                         break;
                     }
                 }
             }
 
+            if (result != null)
+            {
+                Core.Parameter.Classes.SetValueSettings setValueSettings = new Core.Parameter.Classes.SetValueSettings(true, false);
+
+                if (lOD != null && lOD.HasValue)
+                {
+                    result.SetValue(CityModelParameter.LOD, lOD, setValueSettings);
+                }
+
+                if (year != null && year.HasValue)
+                {
+                    result.SetValue(CityModelParameter.Year, year, setValueSettings);
+                }
+            }
+
             return result;
+        }
+
+        public static CityModel CityModel(string path, LOD? lOD = null, int? year = null)
+        {
+            if (string.IsNullOrWhiteSpace(path) || !File.Exists(path))
+            {
+                return null;
+            }
+
+            string text = File.ReadAllText(path);
+            if (string.IsNullOrWhiteSpace(text))
+            {
+                return null;
+            }
+
+            XmlDocument xmlDocument = new XmlDocument();
+            xmlDocument.LoadXml(text);
+
+            return CityModel(xmlDocument, lOD, year);
         }
     }
 }

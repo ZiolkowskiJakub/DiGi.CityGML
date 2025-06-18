@@ -1,12 +1,11 @@
 ﻿using DiGi.CityGML.Interfaces;
-using DiGi.Core.Classes;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text.Json.Serialization;
 
 namespace DiGi.CityGML.Classes
 {
-    public class CityModel : UniqueIdObject, ICityGMLUniqueIdObject
+    public class CityModel : Core.Parameter.Classes.ParametrizedUniqueIdObject, ICityGMLUniqueIdObject
     {
         [JsonIgnore]
         Dictionary<string, Building> buildings;
@@ -29,7 +28,6 @@ namespace DiGi.CityGML.Classes
 
             }
         }
-
 
         [JsonInclude, JsonPropertyName("Buildings")]
         public IEnumerable<Building> Buildings

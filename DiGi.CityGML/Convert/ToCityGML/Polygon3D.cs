@@ -14,21 +14,31 @@ namespace DiGi.CityGML
                 return null;
             }
 
-            List<Point3D> point3Ds = new List<Point3D>();
-            foreach(XmlNode xmlNode_Temp in xmlNodeList)
+            List<Point3D> point3Ds = null;
+
+            if (xmlNodeList.Count == 1 && xmlNodeList[0].LocalName == Constans.XmlNode.Name.PosList)
             {
-                if(xmlNode_Temp.LocalName != Constans.XmlNode.Name.Pos)
-                {
-                    continue;
-                }
+                point3Ds = ToCityGML_Point3Ds(xmlNodeList[0]);
+            }
+            else
+            {
+                point3Ds = new List<Point3D>(); 
 
-                Point3D point3D = ToCityGML_Point3D(xmlNode_Temp);
-                if(point3D == null)
+                foreach (XmlNode xmlNode_Temp in xmlNodeList)
                 {
-                    continue;
-                }
+                    if (xmlNode_Temp.LocalName != Constans.XmlNode.Name.Pos)
+                    {
+                        continue;
+                    }
 
-                point3Ds.Add(point3D);
+                    Point3D point3D = ToCityGML_Point3D(xmlNode_Temp);
+                    if (point3D == null)
+                    {
+                        continue;
+                    }
+
+                    point3Ds.Add(point3D);
+                }
             }
 
             if(point3Ds == null || point3Ds.Count < 3)

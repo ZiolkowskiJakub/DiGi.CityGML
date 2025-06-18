@@ -8,12 +8,12 @@ namespace DiGi.CityGML.Classes
 {
     public class Building : Core.Parameter.Classes.ParametrizedUniqueIdObject, ICityGMLParametrizedUniqueIdObject
     {
-        [JsonIgnore]
-        private Dictionary<string, ISurface> surfaces;
-
         [JsonInclude]
         private int roofTypeId;
 
+        [JsonIgnore]
+        private Dictionary<string, ISurface> surfaces;
+        
         public Building(string uniqueId, int roofTypeId, IEnumerable<ISurface> surfaces)
             : base(uniqueId)
         {
@@ -35,6 +35,15 @@ namespace DiGi.CityGML.Classes
             : base(jsonObject)
         {
 
+        }
+
+        [JsonIgnore]
+        public int RoofTypeId
+        {
+            get
+            {
+                return roofTypeId;
+            }
         }
 
         [JsonInclude, JsonPropertyName("Surfaces")]
@@ -63,15 +72,6 @@ namespace DiGi.CityGML.Classes
                         surfaces[surface_Temp.UniqueId] = surface_Temp;
                     }
                 }
-            }
-        }
-
-        [JsonIgnore]
-        public int RoofTypeId
-        {
-            get
-            {
-                return roofTypeId;
             }
         }
     }

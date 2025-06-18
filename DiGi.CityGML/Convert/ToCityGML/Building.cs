@@ -73,6 +73,67 @@ namespace DiGi.CityGML
                 }
             }
 
+            if(surfaces == null || surfaces.Count == 0)
+            {
+                foreach (XmlNode xmlNode_Temp in xmlNodeList)
+                {
+                    if (xmlNode_Temp.LocalName == Constans.XmlNode.Name.LOD1Solid)
+                    {
+                        XmlNodeList xmlNodeList_Solid = xmlNode_Temp.ChildNodes;
+                        if (xmlNodeList_Solid == null || xmlNodeList_Solid.Count == 0)
+                        {
+                            break;
+                        }
+
+                        foreach(XmlNode xmlNode_Solid in xmlNodeList_Solid)
+                        {
+                            XmlNodeList xmlNodeList_Exterior = xmlNode_Solid.ChildNodes;
+                            if (xmlNodeList_Exterior == null || xmlNodeList_Exterior.Count == 0)
+                            {
+                                continue;
+                            }
+
+                            foreach(XmlNode xmlNode_Exterior in xmlNodeList_Exterior)
+                            {
+                                XmlNodeList xmlNodeList_CompositeSurface = xmlNode_Exterior.ChildNodes;
+                                if (xmlNodeList_CompositeSurface == null || xmlNodeList_CompositeSurface.Count == 0)
+                                {
+                                    continue;
+                                }
+
+                                foreach (XmlNode xmlNode_CompositeSurface in xmlNodeList_CompositeSurface)
+                                {
+                                    XmlNodeList xmlNodeList_SurfaceMember = xmlNode_CompositeSurface.ChildNodes;
+                                    if (xmlNodeList_SurfaceMember == null || xmlNodeList_SurfaceMember.Count == 0)
+                                    {
+                                        continue;
+                                    }
+
+                                    foreach(XmlNode xmlNode_SurfaceMember in xmlNodeList_SurfaceMember)
+                                    {
+                                        ISurface surface = ToCityGML_Surface(xmlNode_SurfaceMember);
+                                        if (surface == null)
+                                        {
+                                            continue;
+                                        }
+
+                                        if (surfaces == null)
+                                        {
+                                            surfaces = new List<ISurface>();
+                                        }
+
+                                        surfaces.Add(surface);
+                                    }
+                                }
+                            }
+                        }
+
+
+                        break;
+                    }
+                }
+            }
+
             Building result = new Building(uniqueId, roofTypeId, surfaces);
             result.SetParameters(xmlNode);
 

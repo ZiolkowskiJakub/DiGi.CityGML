@@ -19,6 +19,9 @@
             public const string Pos = "pos";
             public const string Exterior = "exterior";
             public const string Interior = "interior";
+            public const string LOD1Solid = "lod1Solid";
+            public const string PosList = "posList";
+            
         }
 
     }
