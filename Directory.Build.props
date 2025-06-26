@@ -1,0 +1,9 @@
+<Project>
+  <PropertyGroup>
+    <DiGiVersion>0.9.0.0</DiGiVersion>
+    <Version>$(DiGiVersion)</Version>
+    <AssemblyVersion>$(DiGiVersion)</AssemblyVersion>
+    <FileVersion>$(DiGiVersion)</FileVersion>
+    <InformationalVersion>$(DiGiVersion)</InformationalVersion>
+  </PropertyGroup>
+</Project>
