@@ -5,9 +5,9 @@ namespace DiGi.CityGML
 {
     public static partial class Query
     {
-        public static string Reference(this Building building)
+        public static string? Reference(this Building? building)
         {
-            string result = building?.UniqueId?.Trim();
+            string? result = building?.UniqueId?.Trim();
             if(result == null)
             {
                 return result;

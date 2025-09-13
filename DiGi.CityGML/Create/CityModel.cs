@@ -7,20 +7,20 @@ namespace DiGi.CityGML
 {
     public static partial class Create
     {
-        public static CityModel CityModel(Stream stream, LOD? lOD = null, int? year = null)
+        public static CityModel? CityModel(Stream? stream, LOD? lOD = null, int? year = null)
         {
             if(stream == null)
             {
                 return null;
             }
 
-            XmlDocument xmlDocument = new XmlDocument();
+            XmlDocument xmlDocument = new();
             xmlDocument.Load(stream);
 
             return CityModel(xmlDocument, lOD, year);
         }
 
-        public static CityModel CityModel(XmlDocument xmlDocument, LOD? lOD = null, int? year = null)
+        public static CityModel? CityModel(XmlDocument? xmlDocument, LOD? lOD = null, int? year = null)
         {
             if(xmlDocument == null)
             {
@@ -34,10 +34,10 @@ namespace DiGi.CityGML
             }
 
 
-            CityModel result = null;
+            CityModel? result = null;
             for (int i = 0; i < xmlNodeList.Count; i++)
             {
-                string name = xmlNodeList[i]?.LocalName;
+                string? name = xmlNodeList[i]?.LocalName;
 
                 if (string.IsNullOrWhiteSpace(name))
                 {
@@ -56,7 +56,7 @@ namespace DiGi.CityGML
 
             if (result != null)
             {
-                Core.Parameter.Classes.SetValueSettings setValueSettings = new Core.Parameter.Classes.SetValueSettings(true, false);
+                Core.Parameter.Classes.SetValueSettings setValueSettings = new(true, false);
 
                 if (lOD != null && lOD.HasValue)
                 {
@@ -72,7 +72,7 @@ namespace DiGi.CityGML
             return result;
         }
 
-        public static CityModel CityModel(string path, LOD? lOD = null, int? year = null)
+        public static CityModel? CityModel(string? path, LOD? lOD = null, int? year = null)
         {
             if (string.IsNullOrWhiteSpace(path) || !File.Exists(path))
             {
@@ -85,7 +85,7 @@ namespace DiGi.CityGML
                 return null;
             }
 
-            XmlDocument xmlDocument = new XmlDocument();
+            XmlDocument xmlDocument = new ();
             xmlDocument.LoadXml(text);
 
             return CityModel(xmlDocument, lOD, year);

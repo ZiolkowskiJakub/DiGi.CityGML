@@ -9,30 +9,30 @@ namespace DiGi.CityGML
 {
     public static partial class Query
     {
-        public static Point3D ClosestPoint(this Building building, Point3D point3D, double tolerance = Core.Constans.Tolerance.Distance)
+        public static Point3D? ClosestPoint(this Building? building, Point3D? point3D, double tolerance = Core.Constans.Tolerance.Distance)
         {
             if(building == null || point3D == null)
             {
                 return null;
             }
 
-            IEnumerable<ISurface> surfaces = building?.Surfaces;
+            IEnumerable<ISurface>? surfaces = building?.Surfaces;
             if(surfaces == null || surfaces.Count() == 0)
             {
                 return null;
             }
 
             double distance = double.MaxValue;
-            Point3D result = null;
+            Point3D? result = null;
             foreach(ISurface surface in surfaces)
             {
-                IPolygonalFace3D polygonalFace3D = surface?.Geometry;
+                IPolygonalFace3D? polygonalFace3D = surface?.Geometry;
                 if(polygonalFace3D == null)
                 {
                     continue;
                 }
 
-                Point3D point3D_Temp = polygonalFace3D.ClosestPoint(point3D, tolerance);
+                Point3D? point3D_Temp = polygonalFace3D.ClosestPoint(point3D, tolerance);
                 if(point3D_Temp == null)
                 {
                     continue;

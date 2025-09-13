@@ -1,6 +1,7 @@
 ﻿using DiGi.CityGML.Interfaces;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text.Json.Nodes;
 using System.Text.Json.Serialization;
 
 namespace DiGi.CityGML.Classes
@@ -8,29 +9,41 @@ namespace DiGi.CityGML.Classes
     public class CityModel : Core.Parameter.Classes.ParametrizedUniqueIdObject, ICityGMLUniqueIdObject
     {
         [JsonIgnore]
-        Dictionary<string, Building> buildings;
+        Dictionary<string, Building>? buildings;
 
-        public CityModel(IEnumerable<Building> buildings)
+
+        public CityModel()
+            :base()
+        {
+
+        }
+
+        public CityModel(JsonObject? jsonObject)
+            : base(jsonObject)
+        {
+
+        }
+
+        public CityModel(CityModel? cityModel)
+            : base(cityModel)
+        {
+            if(cityModel is not null)
+            {
+                Buildings = cityModel.Buildings;
+            }
+        }
+
+        public CityModel(IEnumerable<Building>? buildings)
             :base()
         {
             if(buildings != null)
             {
-                this.buildings = new Dictionary<string, Building>();
-                foreach(Building building in buildings)
-                {
-                    if(string.IsNullOrEmpty(building.UniqueId))
-                    {
-                        continue;
-                    }
-
-                    this.buildings[building.UniqueId] = building;
-                }
-
+                Buildings = buildings;
             }
         }
 
         [JsonInclude, JsonPropertyName("Buildings")]
-        public IEnumerable<Building> Buildings
+        public IEnumerable<Building>? Buildings
         {
             get
             {
@@ -46,13 +59,13 @@ namespace DiGi.CityGML.Classes
                     return;
                 }
 
-                buildings = new Dictionary<string, Building>();
+                buildings = [];
                 foreach (Building building in value)
                 {
-                    Building building_Temp = Core.Query.Clone(building);
-                    if (!string.IsNullOrEmpty(building_Temp.UniqueId))
+                    Building? building_Temp = Core.Query.Clone(building);
+                    if (!string.IsNullOrEmpty(building_Temp?.UniqueId))
                     {
-                        buildings[building_Temp.UniqueId] = building_Temp;
+                        buildings[building_Temp!.UniqueId!] = building_Temp;
                     }
                 }
             }

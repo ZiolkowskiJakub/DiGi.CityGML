@@ -5,19 +5,19 @@ namespace DiGi.CityGML.Classes
 {
     public class WallSurface : Surface
     {
-        public WallSurface(JsonObject jsonObject)
+        public WallSurface(JsonObject? jsonObject)
             : base(jsonObject)
         {
 
         }
 
-        public WallSurface(WallSurface wallSurface)
+        public WallSurface(WallSurface? wallSurface)
             : base(wallSurface)
         {
 
         }
 
-        public WallSurface(string uniqueId, IPolygonalFace3D geometry)
+        public WallSurface(string? uniqueId, IPolygonalFace3D? geometry)
             : base(uniqueId, geometry)
         {
 

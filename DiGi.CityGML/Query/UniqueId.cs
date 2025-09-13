@@ -4,7 +4,7 @@ namespace DiGi.CityGML
 {
     public static partial class Query
     {
-        public static string UniqueId(this XmlNode xmlNode)
+        public static string? UniqueId(this XmlNode? xmlNode)
         {
             if(xmlNode == null || xmlNode.Attributes == null || xmlNode.Attributes.Count == 0)
             {

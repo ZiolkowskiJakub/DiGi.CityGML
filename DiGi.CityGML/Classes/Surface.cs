@@ -8,21 +8,21 @@ namespace DiGi.CityGML.Classes
     public abstract class Surface : Core.Classes.UniqueIdObject, ISurface
     {
         [JsonInclude, JsonPropertyName("Geometry")]
-        private IPolygonalFace3D geometry;
+        private readonly IPolygonalFace3D? geometry;
 
-        public Surface(string uniqueId, IPolygonalFace3D geometry)
+        public Surface(string? uniqueId, IPolygonalFace3D? geometry)
             : base(uniqueId)
         {
             this.geometry = Core.Query.Clone(geometry);
         }
 
-        public Surface(JsonObject jsonObject)
+        public Surface(JsonObject? jsonObject)
             : base(jsonObject)
         {
 
         }
 
-        public Surface(Surface surface)
+        public Surface(Surface? surface)
             : base(surface)
         {
             if(surface != null)
@@ -32,7 +32,7 @@ namespace DiGi.CityGML.Classes
         }
 
         [JsonIgnore]
-        public IPolygonalFace3D Geometry
+        public IPolygonalFace3D? Geometry
         {
             get
             {

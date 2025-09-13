@@ -5,19 +5,19 @@ namespace DiGi.CityGML.Classes
 {
     public class RoofSurface : Surface
     {
-        public RoofSurface(JsonObject jsonObject)
+        public RoofSurface(JsonObject? jsonObject)
             :base(jsonObject)
         {
 
         }
 
-        public RoofSurface(RoofSurface roofSurface)
+        public RoofSurface(RoofSurface? roofSurface)
             : base(roofSurface)
         {
 
         }
 
-        public RoofSurface(string uniqueId, IPolygonalFace3D geometry)
+        public RoofSurface(string? uniqueId, IPolygonalFace3D? geometry)
             : base(uniqueId, geometry)
         {
 

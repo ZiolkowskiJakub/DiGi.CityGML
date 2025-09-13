@@ -7,7 +7,7 @@ namespace DiGi.CityGML
 {
     public static partial class Convert
     {
-        public static Building ToCityGML_Building(XmlNode xmlNode)
+        public static Building? ToCityGML_Building(XmlNode? xmlNode)
         {
             if(xmlNode == null)
             {
@@ -33,9 +33,9 @@ namespace DiGi.CityGML
                 return null;
             }
 
-            string uniqueId = xmlNode.UniqueId();
+            string? uniqueId = xmlNode.UniqueId();
 
-            List<ISurface> surfaces = null;            
+            List<ISurface>? surfaces = null;            
             int roofTypeId = -1;
 
             foreach (XmlNode xmlNode_Temp in xmlNodeList)
@@ -57,16 +57,13 @@ namespace DiGi.CityGML
 
                     foreach(XmlNode xmlNode_Surface in xmlNodeList_Surface)
                     {
-                        ISurface surface = ToCityGML_Surface(xmlNode_Surface);
+                        ISurface? surface = ToCityGML_Surface(xmlNode_Surface);
                         if (surface == null)
                         {
                             continue;
                         }
 
-                        if(surfaces == null)
-                        {
-                            surfaces = new List<ISurface>();
-                        }
+                        surfaces ??= [];
 
                         surfaces.Add(surface);
                     }
@@ -111,16 +108,13 @@ namespace DiGi.CityGML
 
                                     foreach(XmlNode xmlNode_SurfaceMember in xmlNodeList_SurfaceMember)
                                     {
-                                        ISurface surface = ToCityGML_Surface(xmlNode_SurfaceMember);
+                                        ISurface? surface = ToCityGML_Surface(xmlNode_SurfaceMember);
                                         if (surface == null)
                                         {
                                             continue;
                                         }
 
-                                        if (surfaces == null)
-                                        {
-                                            surfaces = new List<ISurface>();
-                                        }
+                                        surfaces ??= [];
 
                                         surfaces.Add(surface);
                                     }
@@ -134,7 +128,7 @@ namespace DiGi.CityGML
                 }
             }
 
-            Building result = new Building(uniqueId, roofTypeId, surfaces);
+            Building result = new (uniqueId, roofTypeId, surfaces);
             result.SetParameters(xmlNode);
 
             return result;

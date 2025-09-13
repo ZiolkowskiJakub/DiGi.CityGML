@@ -9,22 +9,22 @@ namespace DiGi.CityGML
 {
     public static partial class Create
     {
-        public static List<CityModel> CityModels(string path)
+        public static List<CityModel>? CityModels(string? path)
         {
             if(string.IsNullOrWhiteSpace(path))
             {
                 return null;
             }
 
-            string[] paths_Zip = null;
+            string[]? paths_Zip = null;
 
-            List<CityModel> result = null;
+            List<CityModel>? result = null;
 
             if (File.Exists(path))
             {
                 if(Path.GetExtension(path) == ".zip")
                 {
-                    paths_Zip = new string[] { path };
+                    paths_Zip = [path!];
                 }
                 else
                 {
@@ -43,10 +43,10 @@ namespace DiGi.CityGML
                         lOD = lOD_Temp;
                     }
 
-                    CityModel cityModel = CityModel(path, lOD, year);
+                    CityModel? cityModel = CityModel(path, lOD, year);
                     if(cityModel != null)
                     {
-                        result = new List<CityModel> { cityModel };
+                        result = [cityModel];
                     }
 
                     return result;
@@ -62,7 +62,7 @@ namespace DiGi.CityGML
                 return null;
             }
 
-            result = new List<CityModel>();
+            result = [];
             foreach (string path_Zip in paths_Zip)
             {
                 LOD? lOD = null;
@@ -80,24 +80,22 @@ namespace DiGi.CityGML
                     lOD = lOD_Temp;
                 }
 
-                using (ZipArchive zipArchive = ZipFile.OpenRead(path_Zip))
+                using ZipArchive zipArchive = ZipFile.OpenRead(path_Zip);
+
+                foreach (ZipArchiveEntry zipArchiveEntry in zipArchive.Entries)
                 {
-                    foreach (ZipArchiveEntry zipArchiveEntry in zipArchive.Entries)
+                    if (zipArchiveEntry.Open() is not DeflateStream)
                     {
-                        DeflateStream deflateStream = zipArchiveEntry.Open() as DeflateStream;
-                        if (deflateStream == null)
-                        {
-                            continue;
-                        }
-
-                        CityModel cityModel = CityModel(zipArchiveEntry.Open(), lOD, year);
-                        if(cityModel == null)
-                        {
-                            continue;
-                        }
-
-                        result.Add(cityModel);
+                        continue;
                     }
+
+                    CityModel? cityModel = CityModel(zipArchiveEntry.Open(), lOD, year);
+                    if (cityModel == null)
+                    {
+                        continue;
+                    }
+
+                    result.Add(cityModel);
                 }
             }
 

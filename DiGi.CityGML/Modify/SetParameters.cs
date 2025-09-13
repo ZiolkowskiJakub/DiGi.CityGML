@@ -8,7 +8,7 @@ namespace DiGi.CityGML
 {
     public static partial class Create
     {
-        public static bool SetParameters(this Building building, XmlNode xmlNode)
+        public static bool SetParameters(this Building? building, XmlNode? xmlNode)
         {
             if(building == null || xmlNode == null)
             {
@@ -26,7 +26,7 @@ namespace DiGi.CityGML
             {
                 if(xmlNode_Temp.LocalName == Constans.XmlNode.Name.StringAttribute)
                 {
-                    string value = xmlNode_Temp.Attributes[Constans.XmlAttribute.Name.AttributeName]?.Value;
+                    string? value = xmlNode_Temp.Attributes[Constans.XmlAttribute.Name.AttributeName]?.Value;
                     if(string.IsNullOrWhiteSpace(value))
                     {
                         continue;
@@ -36,7 +36,7 @@ namespace DiGi.CityGML
                     {
                         if(value == buildingParameter.ToString())
                         {
-                            XmlNode xmlNode_Value = xmlNode_Temp.ChildNodes.Cast<XmlNode>().ToList()?.Find(x => x.LocalName == Constans.XmlNode.Name.Value);
+                            XmlNode? xmlNode_Value = xmlNode_Temp.ChildNodes.Cast<XmlNode>().ToList()?.Find(x => x.LocalName == Constans.XmlNode.Name.Value);
                             if(xmlNode_Value != null)
                             {
                                 building.SetValue(buildingParameter, xmlNode_Value.InnerText);

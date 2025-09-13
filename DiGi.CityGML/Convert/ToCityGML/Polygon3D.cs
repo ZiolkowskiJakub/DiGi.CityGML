@@ -6,23 +6,22 @@ namespace DiGi.CityGML
 {
     public static partial class Convert
     {
-        public static Polygon3D ToCityGML_Polygon3D(XmlNode xmlNode, double tolerance = Core.Constans.Tolerance.Distance)
+        public static Polygon3D? ToCityGML_Polygon3D(XmlNode? xmlNode)
         {
-            XmlNodeList xmlNodeList = xmlNode?.ChildNodes;
+            XmlNodeList? xmlNodeList = xmlNode?.ChildNodes;
             if(xmlNodeList == null || xmlNodeList.Count == 0)
             {
                 return null;
             }
 
-            List<Point3D> point3Ds = null;
-
+            List<Point3D>? point3Ds;
             if (xmlNodeList.Count == 1 && xmlNodeList[0].LocalName == Constans.XmlNode.Name.PosList)
             {
                 point3Ds = ToCityGML_Point3Ds(xmlNodeList[0]);
             }
             else
             {
-                point3Ds = new List<Point3D>(); 
+                point3Ds = []; 
 
                 foreach (XmlNode xmlNode_Temp in xmlNodeList)
                 {
@@ -31,7 +30,7 @@ namespace DiGi.CityGML
                         continue;
                     }
 
-                    Point3D point3D = ToCityGML_Point3D(xmlNode_Temp);
+                    Point3D? point3D = ToCityGML_Point3D(xmlNode_Temp);
                     if (point3D == null)
                     {
                         continue;

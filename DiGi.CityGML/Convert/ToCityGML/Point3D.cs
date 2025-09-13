@@ -5,15 +5,15 @@ namespace DiGi.CityGML
 {
     public static partial class Convert
     {
-        public static Point3D ToCityGML_Point3D(XmlNode xmlNode)
+        public static Point3D? ToCityGML_Point3D(XmlNode xmlNode)
         {
-            string innerText = xmlNode?.InnerText;
+            string? innerText = xmlNode?.InnerText;
             if(string.IsNullOrWhiteSpace(innerText))
             {
                 return null;
             }
 
-            string[] strings = innerText.Split(' ');
+            string[]? strings = innerText!.Split(' ');
             if(strings == null || strings.Length == 0)
             {
                 return null;

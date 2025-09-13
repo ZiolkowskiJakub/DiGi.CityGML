@@ -9,19 +9,19 @@ namespace DiGi.CityGML.Classes
     public class Building : Core.Parameter.Classes.ParametrizedUniqueIdObject, ICityGMLParametrizedUniqueIdObject
     {
         [JsonInclude]
-        private int roofTypeId;
+        private readonly int roofTypeId = -1;
 
         [JsonIgnore]
-        private Dictionary<string, ISurface> surfaces;
+        private Dictionary<string, ISurface>? surfaces;
         
-        public Building(string uniqueId, int roofTypeId, IEnumerable<ISurface> surfaces)
+        public Building(string? uniqueId, int roofTypeId, IEnumerable<ISurface>? surfaces)
             : base(uniqueId)
         {
             Surfaces = surfaces;
-            roofTypeId = roofTypeId;
+            this.roofTypeId = roofTypeId;
         }
 
-        public Building(Building building)
+        public Building(Building? building)
             : base(building)
         {
             if(building != null)
@@ -31,7 +31,7 @@ namespace DiGi.CityGML.Classes
             }
         }
 
-        public Building(JsonObject jsonObject)
+        public Building(JsonObject? jsonObject)
             : base(jsonObject)
         {
 
@@ -47,7 +47,7 @@ namespace DiGi.CityGML.Classes
         }
 
         [JsonInclude, JsonPropertyName("Surfaces")]
-        public IEnumerable<ISurface> Surfaces
+        public IEnumerable<ISurface>? Surfaces
         {
             get
             {
@@ -63,13 +63,13 @@ namespace DiGi.CityGML.Classes
                     return;
                 }
 
-                surfaces = new Dictionary<string, ISurface>();
+                surfaces = [];
                 foreach (ISurface surface in value)
                 {
-                    ISurface surface_Temp = Core.Query.Clone(surface);
-                    if (!string.IsNullOrEmpty(surface_Temp.UniqueId))
+                    ISurface? surface_Temp = Core.Query.Clone(surface);
+                    if (!string.IsNullOrEmpty(surface_Temp?.UniqueId))
                     {
-                        surfaces[surface_Temp.UniqueId] = surface_Temp;
+                        surfaces[surface_Temp!.UniqueId!] = surface_Temp;
                     }
                 }
             }
