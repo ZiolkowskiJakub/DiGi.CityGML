@@ -32,7 +32,7 @@ namespace DiGi.CityGML
                     continue;
                 }
 
-                Point3D? point3D_Temp = polygonalFace3D.ClosestPoint(point3D, tolerance);
+                Point3D? point3D_Temp = polygonalFace3D.ClosestPoint(point3D);
                 if(point3D_Temp == null)
                 {
                     continue;
