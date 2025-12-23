@@ -9,7 +9,7 @@ namespace DiGi.CityGML
         public static Polygon3D? ToCityGML_Polygon3D(XmlNode? xmlNode)
         {
             XmlNodeList? xmlNodeList = xmlNode?.ChildNodes;
-            if(xmlNodeList == null || xmlNodeList.Count == 0)
+            if (xmlNodeList == null || xmlNodeList.Count == 0)
             {
                 return null;
             }
@@ -21,7 +21,7 @@ namespace DiGi.CityGML
             }
             else
             {
-                point3Ds = []; 
+                point3Ds = [];
 
                 foreach (XmlNode xmlNode_Temp in xmlNodeList)
                 {
@@ -40,7 +40,7 @@ namespace DiGi.CityGML
                 }
             }
 
-            if(point3Ds == null || point3Ds.Count < 3)
+            if (point3Ds == null || point3Ds.Count < 3)
             {
                 return null;
             }

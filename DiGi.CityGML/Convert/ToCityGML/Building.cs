@@ -9,7 +9,7 @@ namespace DiGi.CityGML
     {
         public static Building? ToCityGML_Building(XmlNode? xmlNode)
         {
-            if(xmlNode == null)
+            if (xmlNode == null)
             {
                 return null;
             }
@@ -22,9 +22,9 @@ namespace DiGi.CityGML
 
             if (xmlNode.LocalName != Constans.XmlNode.Name.Building)
             {
-                foreach(XmlNode xmlNode_Temp in xmlNodeList)
+                foreach (XmlNode xmlNode_Temp in xmlNodeList)
                 {
-                    if(xmlNode_Temp.LocalName == Constans.XmlNode.Name.Building)
+                    if (xmlNode_Temp.LocalName == Constans.XmlNode.Name.Building)
                     {
                         return ToCityGML_Building(xmlNode_Temp);
                     }
@@ -35,14 +35,14 @@ namespace DiGi.CityGML
 
             string? uniqueId = xmlNode.UniqueId();
 
-            List<ISurface>? surfaces = null;            
+            List<ISurface>? surfaces = null;
             int roofTypeId = -1;
 
             foreach (XmlNode xmlNode_Temp in xmlNodeList)
             {
                 if (xmlNode_Temp.LocalName == Constans.XmlNode.Name.RoofType)
                 {
-                    if(int.TryParse(xmlNode_Temp.InnerText, out int roofTypeId_Temp))
+                    if (int.TryParse(xmlNode_Temp.InnerText, out int roofTypeId_Temp))
                     {
                         roofTypeId = roofTypeId_Temp;
                     }
@@ -50,12 +50,12 @@ namespace DiGi.CityGML
                 else if (xmlNode_Temp.LocalName == Constans.XmlNode.Name.BoundedBy)
                 {
                     XmlNodeList xmlNodeList_Surface = xmlNode_Temp.ChildNodes;
-                    if(xmlNodeList_Surface == null || xmlNodeList_Surface.Count == 0)
+                    if (xmlNodeList_Surface == null || xmlNodeList_Surface.Count == 0)
                     {
                         continue;
                     }
 
-                    foreach(XmlNode xmlNode_Surface in xmlNodeList_Surface)
+                    foreach (XmlNode xmlNode_Surface in xmlNodeList_Surface)
                     {
                         ISurface? surface = ToCityGML_Surface(xmlNode_Surface);
                         if (surface == null)
@@ -70,7 +70,7 @@ namespace DiGi.CityGML
                 }
             }
 
-            if(surfaces == null || surfaces.Count == 0)
+            if (surfaces == null || surfaces.Count == 0)
             {
                 foreach (XmlNode xmlNode_Temp in xmlNodeList)
                 {
@@ -82,7 +82,7 @@ namespace DiGi.CityGML
                             break;
                         }
 
-                        foreach(XmlNode xmlNode_Solid in xmlNodeList_Solid)
+                        foreach (XmlNode xmlNode_Solid in xmlNodeList_Solid)
                         {
                             XmlNodeList xmlNodeList_Exterior = xmlNode_Solid.ChildNodes;
                             if (xmlNodeList_Exterior == null || xmlNodeList_Exterior.Count == 0)
@@ -90,7 +90,7 @@ namespace DiGi.CityGML
                                 continue;
                             }
 
-                            foreach(XmlNode xmlNode_Exterior in xmlNodeList_Exterior)
+                            foreach (XmlNode xmlNode_Exterior in xmlNodeList_Exterior)
                             {
                                 XmlNodeList xmlNodeList_CompositeSurface = xmlNode_Exterior.ChildNodes;
                                 if (xmlNodeList_CompositeSurface == null || xmlNodeList_CompositeSurface.Count == 0)
@@ -106,7 +106,7 @@ namespace DiGi.CityGML
                                         continue;
                                     }
 
-                                    foreach(XmlNode xmlNode_SurfaceMember in xmlNodeList_SurfaceMember)
+                                    foreach (XmlNode xmlNode_SurfaceMember in xmlNodeList_SurfaceMember)
                                     {
                                         ISurface? surface = ToCityGML_Surface(xmlNode_SurfaceMember);
                                         if (surface == null)
@@ -128,7 +128,7 @@ namespace DiGi.CityGML
                 }
             }
 
-            Building result = new (uniqueId, roofTypeId, surfaces);
+            Building result = new(uniqueId, roofTypeId, surfaces);
             result.SetParameters(xmlNode);
 
             return result;

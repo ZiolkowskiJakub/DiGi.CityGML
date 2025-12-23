@@ -6,7 +6,7 @@ namespace DiGi.CityGML.Classes
     public class RoofSurface : Surface
     {
         public RoofSurface(JsonObject? jsonObject)
-            :base(jsonObject)
+            : base(jsonObject)
         {
 
         }

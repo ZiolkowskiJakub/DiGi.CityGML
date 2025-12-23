@@ -11,7 +11,7 @@ namespace DiGi.CityGML
     {
         public static List<CityModel>? CityModels(string? path)
         {
-            if(string.IsNullOrWhiteSpace(path))
+            if (string.IsNullOrWhiteSpace(path))
             {
                 return null;
             }
@@ -22,7 +22,7 @@ namespace DiGi.CityGML
 
             if (File.Exists(path))
             {
-                if(Path.GetExtension(path) == ".zip")
+                if (Path.GetExtension(path) == ".zip")
                 {
                     paths_Zip = [path!];
                 }
@@ -44,7 +44,7 @@ namespace DiGi.CityGML
                     }
 
                     CityModel? cityModel = CityModel(path, lOD, year);
-                    if(cityModel != null)
+                    if (cityModel != null)
                     {
                         result = [cityModel];
                     }
@@ -52,12 +52,12 @@ namespace DiGi.CityGML
                     return result;
                 }
             }
-            else if(Directory.Exists(path))
+            else if (Directory.Exists(path))
             {
                 paths_Zip = Directory.GetFiles(path, "*.zip");
             }
 
-            if(paths_Zip == null || paths_Zip.Length == 0)
+            if (paths_Zip == null || paths_Zip.Length == 0)
             {
                 return null;
             }

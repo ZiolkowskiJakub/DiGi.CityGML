@@ -8,7 +8,7 @@ namespace DiGi.CityGML
         public static string? Reference(this Building? building)
         {
             string? result = building?.UniqueId?.Trim();
-            if(result == null)
+            if (result == null)
             {
                 return result;
             }
@@ -16,7 +16,7 @@ namespace DiGi.CityGML
             if (result.StartsWith("ID-"))
             {
                 string[] values = result.Split('-');
-                if(values.Length > 2)
+                if (values.Length > 2)
                 {
                     result = string.Join("-", new ArraySegment<string>(values, 2, values.Length - 2));
                 }

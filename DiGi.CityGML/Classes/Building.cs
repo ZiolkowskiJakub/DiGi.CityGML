@@ -13,7 +13,7 @@ namespace DiGi.CityGML.Classes
 
         [JsonIgnore]
         private Dictionary<string, ISurface>? surfaces;
-        
+
         public Building(string? uniqueId, int roofTypeId, IEnumerable<ISurface>? surfaces)
             : base(uniqueId)
         {
@@ -24,7 +24,7 @@ namespace DiGi.CityGML.Classes
         public Building(Building? building)
             : base(building)
         {
-            if(building != null)
+            if (building != null)
             {
                 Surfaces = building.surfaces?.Values;
                 roofTypeId = building.roofTypeId;

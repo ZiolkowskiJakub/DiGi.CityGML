@@ -25,7 +25,7 @@ namespace DiGi.CityGML.Classes
         public Surface(Surface? surface)
             : base(surface)
         {
-            if(surface != null)
+            if (surface != null)
             {
                 geometry = Core.Query.Clone(surface.geometry);
             }

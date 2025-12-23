@@ -1,9 +1,9 @@
 ﻿using DiGi.CityGML.Classes;
-using DiGi.Geometry.Spatial.Classes;
-using System.Collections.Generic;
 using DiGi.CityGML.Interfaces;
-using System.Linq;
+using DiGi.Geometry.Spatial.Classes;
 using DiGi.Geometry.Spatial.Interfaces;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace DiGi.CityGML
 {
@@ -12,16 +12,16 @@ namespace DiGi.CityGML
         public static Polyhedron? Polyhedron(this Building? building)
         {
             IEnumerable<ISurface>? surfaces = building?.Surfaces;
-            if(surfaces == null || surfaces.Count() == 0)
+            if (surfaces == null || surfaces.Count() == 0)
             {
                 return null;
             }
 
             List<IPolygonalFace3D> polygonalFace3Ds = [];
-            foreach(ISurface surface in surfaces)
+            foreach (ISurface surface in surfaces)
             {
                 IPolygonalFace3D? polygonalFace3D = surface?.Geometry;
-                if(polygonalFace3D == null)
+                if (polygonalFace3D == null)
                 {
                     continue;
                 }

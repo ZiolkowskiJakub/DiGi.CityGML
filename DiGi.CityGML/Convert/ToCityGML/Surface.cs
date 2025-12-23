@@ -15,13 +15,13 @@ namespace DiGi.CityGML
             }
 
             IPolygonalFace3D? polygonalFace3D = ToCityGML_PolygonalFace3D(xmlNode);
-            if(polygonalFace3D == null)
+            if (polygonalFace3D == null)
             {
                 return null;
             }
 
             string? uniqueId = Query.UniqueId(xmlNode);
-            if(string.IsNullOrWhiteSpace(uniqueId) && xmlNode.ChildNodes != null && xmlNode.ChildNodes.Count != 0)
+            if (string.IsNullOrWhiteSpace(uniqueId) && xmlNode.ChildNodes != null && xmlNode.ChildNodes.Count != 0)
             {
                 uniqueId = Query.UniqueId(xmlNode.ChildNodes[0]);
             }

@@ -9,7 +9,7 @@ namespace DiGi.CityGML
     {
         public static CityModel? CityModel(Stream? stream, LOD? lOD = null, int? year = null)
         {
-            if(stream == null)
+            if (stream == null)
             {
                 return null;
             }
@@ -22,7 +22,7 @@ namespace DiGi.CityGML
 
         public static CityModel? CityModel(XmlDocument? xmlDocument, LOD? lOD = null, int? year = null)
         {
-            if(xmlDocument == null)
+            if (xmlDocument == null)
             {
                 return null;
             }
@@ -85,7 +85,7 @@ namespace DiGi.CityGML
                 return null;
             }
 
-            XmlDocument xmlDocument = new ();
+            XmlDocument xmlDocument = new();
             xmlDocument.LoadXml(text);
 
             return CityModel(xmlDocument, lOD, year);

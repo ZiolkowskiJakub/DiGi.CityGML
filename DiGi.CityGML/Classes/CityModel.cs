@@ -11,9 +11,8 @@ namespace DiGi.CityGML.Classes
         [JsonIgnore]
         Dictionary<string, Building>? buildings;
 
-
         public CityModel()
-            :base()
+            : base()
         {
 
         }
@@ -27,16 +26,16 @@ namespace DiGi.CityGML.Classes
         public CityModel(CityModel? cityModel)
             : base(cityModel)
         {
-            if(cityModel is not null)
+            if (cityModel is not null)
             {
                 Buildings = cityModel.Buildings;
             }
         }
 
         public CityModel(IEnumerable<Building>? buildings)
-            :base()
+            : base()
         {
-            if(buildings != null)
+            if (buildings != null)
             {
                 Buildings = buildings;
             }

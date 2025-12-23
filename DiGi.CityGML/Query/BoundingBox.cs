@@ -1,7 +1,7 @@
 ﻿using DiGi.CityGML.Classes;
+using DiGi.CityGML.Interfaces;
 using DiGi.Geometry.Spatial.Classes;
 using System.Collections.Generic;
-using DiGi.CityGML.Interfaces;
 using System.Linq;
 
 namespace DiGi.CityGML
@@ -11,16 +11,16 @@ namespace DiGi.CityGML
         public static BoundingBox3D? BoundingBox(this Building? building)
         {
             IEnumerable<ISurface>? surfaces = building?.Surfaces;
-            if(surfaces == null || surfaces.Count() == 0)
+            if (surfaces == null || surfaces.Count() == 0)
             {
                 return null;
             }
 
             List<BoundingBox3D> boundingBox3Ds = [];
-            foreach(ISurface surface in surfaces)
+            foreach (ISurface surface in surfaces)
             {
                 BoundingBox3D? boundingBox3D = surface?.Geometry?.GetBoundingBox();
-                if(boundingBox3D == null)
+                if (boundingBox3D == null)
                 {
                     continue;
                 }

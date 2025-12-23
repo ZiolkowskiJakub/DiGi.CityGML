@@ -19,7 +19,7 @@ namespace DiGi.CityGML.Test
         {
             string? path = null;
 
-            using (OpenFileDialog openFileDialog = new ())
+            using (OpenFileDialog openFileDialog = new())
             {
                 openFileDialog.Title = "Select GML File";
                 openFileDialog.Filter = "GML File (*.gml)|*.gml|All files (*.*)|*.*";
@@ -58,7 +58,7 @@ namespace DiGi.CityGML.Test
 
         private void OpenDirectory()
         {
-            FolderBrowserDialog folderBrowserDialog = new ();
+            FolderBrowserDialog folderBrowserDialog = new();
             DialogResult dialogResult = folderBrowserDialog.ShowDialog(this);
             if (dialogResult != DialogResult.OK)
             {

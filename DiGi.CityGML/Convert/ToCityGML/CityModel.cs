@@ -8,7 +8,7 @@ namespace DiGi.CityGML
     {
         public static CityModel? ToCityGML_CityModel(XmlNode? xmlNode)
         {
-            if(xmlNode == null)
+            if (xmlNode == null)
             {
                 return null;
             }
@@ -16,18 +16,18 @@ namespace DiGi.CityGML
             List<Building>? buildings = null;
 
             XmlNodeList xmlNodeList = xmlNode.ChildNodes;
-            if(xmlNodeList != null && xmlNodeList.Count != 0)
+            if (xmlNodeList != null && xmlNodeList.Count != 0)
             {
                 buildings = [];
 
-                foreach(XmlNode xmlNode_Temp in xmlNodeList)
+                foreach (XmlNode xmlNode_Temp in xmlNodeList)
                 {
                     string? name = xmlNode_Temp?.LocalName;
 
                     if (name == Constans.XmlNode.Name.CityObjectMember)
                     {
                         Building? building = ToCityGML_Building(xmlNode_Temp);
-                        if(building != null)
+                        if (building != null)
                         {
                             buildings.Add(building);
                         }
@@ -36,7 +36,7 @@ namespace DiGi.CityGML
 
             }
 
-            CityModel result = new (buildings);
+            CityModel result = new(buildings);
 
             return result;
         }

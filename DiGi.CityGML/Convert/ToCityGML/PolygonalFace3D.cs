@@ -18,10 +18,10 @@ namespace DiGi.CityGML
 
             if (xmlNode!.LocalName != Constans.XmlNode.Name.Polygon)
             {
-                foreach(XmlNode xmlNode_Temp in xmlNodeList)
+                foreach (XmlNode xmlNode_Temp in xmlNodeList)
                 {
                     result = ToCityGML_PolygonalFace3D(xmlNode_Temp, tolerance);
-                    if(result != null)
+                    if (result != null)
                     {
                         return result;
                     }
@@ -35,10 +35,10 @@ namespace DiGi.CityGML
 
             foreach (XmlNode xmlNode_Temp in xmlNodeList)
             {
-                if(xmlNode_Temp.LocalName == Constans.XmlNode.Name.Exterior)
+                if (xmlNode_Temp.LocalName == Constans.XmlNode.Name.Exterior)
                 {
                     XmlNodeList? xmlNodeList_LinearRing = xmlNode_Temp?.ChildNodes;
-                    if(xmlNodeList_LinearRing != null)
+                    if (xmlNodeList_LinearRing != null)
                     {
                         foreach (XmlNode xmlNode_LinearRing in xmlNodeList_LinearRing)
                         {
@@ -53,12 +53,12 @@ namespace DiGi.CityGML
                         }
                     }
                 }
-                else if(xmlNode_Temp.LocalName == Constans.XmlNode.Name.Interior)
+                else if (xmlNode_Temp.LocalName == Constans.XmlNode.Name.Interior)
                 {
                     internalEdge3Ds = [];
 
                     XmlNodeList? xmlNodeList_LinearRing = xmlNode_Temp?.ChildNodes;
-                    if(xmlNodeList_LinearRing != null)
+                    if (xmlNodeList_LinearRing != null)
                     {
                         foreach (XmlNode xmlNode_LinearRing in xmlNodeList_LinearRing)
                         {
@@ -75,7 +75,7 @@ namespace DiGi.CityGML
                 }
             }
 
-            if(externalEdge3D == null)
+            if (externalEdge3D == null)
             {
                 return null;
             }
