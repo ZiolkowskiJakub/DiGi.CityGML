@@ -9,18 +9,16 @@ namespace DiGi.CityGML.Classes
     public class CityModel : Core.Parameter.Classes.ParametrizedUniqueIdObject, ICityGMLUniqueIdObject
     {
         [JsonIgnore]
-        Dictionary<string, Building>? buildings;
+        private Dictionary<string, Building>? buildings;
 
         public CityModel()
             : base()
         {
-
         }
 
         public CityModel(JsonObject? jsonObject)
             : base(jsonObject)
         {
-
         }
 
         public CityModel(CityModel? cityModel)

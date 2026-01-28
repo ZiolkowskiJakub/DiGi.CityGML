@@ -8,19 +8,16 @@ namespace DiGi.CityGML.Classes
         public WallSurface(JsonObject? jsonObject)
             : base(jsonObject)
         {
-
         }
 
         public WallSurface(WallSurface? wallSurface)
             : base(wallSurface)
         {
-
         }
 
         public WallSurface(string? uniqueId, IPolygonalFace3D? geometry)
             : base(uniqueId, geometry)
         {
-
         }
     }
 }

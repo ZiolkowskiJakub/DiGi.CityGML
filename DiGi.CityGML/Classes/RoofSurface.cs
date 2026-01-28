@@ -8,19 +8,16 @@ namespace DiGi.CityGML.Classes
         public RoofSurface(JsonObject? jsonObject)
             : base(jsonObject)
         {
-
         }
 
         public RoofSurface(RoofSurface? roofSurface)
             : base(roofSurface)
         {
-
         }
 
         public RoofSurface(string? uniqueId, IPolygonalFace3D? geometry)
             : base(uniqueId, geometry)
         {
-
         }
     }
 }

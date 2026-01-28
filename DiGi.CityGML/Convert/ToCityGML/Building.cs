@@ -122,7 +122,6 @@ namespace DiGi.CityGML
                             }
                         }
 
-
                         break;
                     }
                 }

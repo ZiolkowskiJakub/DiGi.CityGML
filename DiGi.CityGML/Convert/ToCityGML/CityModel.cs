@@ -33,7 +33,6 @@ namespace DiGi.CityGML
                         }
                     }
                 }
-
             }
 
             CityModel result = new(buildings);

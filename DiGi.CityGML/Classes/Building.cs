@@ -34,7 +34,6 @@ namespace DiGi.CityGML.Classes
         public Building(JsonObject? jsonObject)
             : base(jsonObject)
         {
-
         }
 
         [JsonIgnore]

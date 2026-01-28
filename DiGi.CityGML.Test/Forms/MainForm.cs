@@ -12,7 +12,6 @@ namespace DiGi.CityGML.Test
 
         private void MainForm_Load(object sender, EventArgs e)
         {
-
         }
 
         private static void OpenFile()

@@ -39,7 +39,6 @@ namespace DiGi.CityGML
                 }
 
                 result.Add(new Point3D(x, y, z));
-
             }
 
             return result;

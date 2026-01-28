@@ -7,7 +7,5 @@
             public const string AttributeName = "name";
             public const string Id = "id";
         }
-
     }
 }
-

@@ -33,7 +33,6 @@ namespace DiGi.CityGML
                 return null;
             }
 
-
             CityModel? result = null;
             for (int i = 0; i < xmlNodeList.Count; i++)
             {

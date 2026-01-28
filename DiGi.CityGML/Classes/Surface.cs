@@ -19,7 +19,6 @@ namespace DiGi.CityGML.Classes
         public Surface(JsonObject? jsonObject)
             : base(jsonObject)
         {
-
         }
 
         public Surface(Surface? surface)

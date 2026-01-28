@@ -8,19 +8,16 @@ namespace DiGi.CityGML.Classes
         public GroundSurface(JsonObject? jsonObject)
             : base(jsonObject)
         {
-
         }
 
         public GroundSurface(GroundSurface? groundSurface)
             : base(groundSurface)
         {
-
         }
 
         public GroundSurface(string? uniqueId, IPolygonalFace3D? geometry)
             : base(uniqueId, geometry)
         {
-
         }
     }
 }

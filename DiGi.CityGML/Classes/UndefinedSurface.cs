@@ -8,19 +8,16 @@ namespace DiGi.CityGML.Classes
         public UndefinedSurface(JsonObject? jsonObject)
             : base(jsonObject)
         {
-
         }
 
         public UndefinedSurface(UndefinedSurface? undefinedSurface)
             : base(undefinedSurface)
         {
-
         }
 
         public UndefinedSurface(string? uniqueId, IPolygonalFace3D? geometry)
             : base(uniqueId, geometry)
         {
-
         }
     }
 }
