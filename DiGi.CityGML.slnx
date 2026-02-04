@@ -1,0 +1,8 @@
+<Solution>
+  <Folder Name="/Solution Items/">
+    <File Path=".editorconfig" />
+    <File Path="Directory.Build.props" />
+  </Folder>
+  <Project Path="DiGi.CityGML.Test/DiGi.CityGML.Test.csproj" />
+  <Project Path="DiGi.CityGML/DiGi.CityGML.csproj" />
+</Solution>
