@@ -6,7 +6,7 @@ namespace DiGi.CityGML
 {
     public static partial class Convert
     {
-        public static IPolygonalFace3D? ToCityGML_PolygonalFace3D(XmlNode? xmlNode, double tolerance = Core.Constans.Tolerance.Distance)
+        public static IPolygonalFace3D? ToCityGML_PolygonalFace3D(XmlNode? xmlNode, double tolerance = Core.Constants.Tolerance.Distance)
         {
             XmlNodeList? xmlNodeList = xmlNode?.ChildNodes;
             if (xmlNodeList == null || xmlNodeList.Count == 0)
@@ -16,7 +16,7 @@ namespace DiGi.CityGML
 
             IPolygonalFace3D? result = null;
 
-            if (xmlNode!.LocalName != Constans.XmlNode.Name.Polygon)
+            if (xmlNode!.LocalName != Constants.XmlNode.Name.Polygon)
             {
                 foreach (XmlNode xmlNode_Temp in xmlNodeList)
                 {
@@ -35,14 +35,14 @@ namespace DiGi.CityGML
 
             foreach (XmlNode xmlNode_Temp in xmlNodeList)
             {
-                if (xmlNode_Temp.LocalName == Constans.XmlNode.Name.Exterior)
+                if (xmlNode_Temp.LocalName == Constants.XmlNode.Name.Exterior)
                 {
                     XmlNodeList? xmlNodeList_LinearRing = xmlNode_Temp?.ChildNodes;
                     if (xmlNodeList_LinearRing != null)
                     {
                         foreach (XmlNode xmlNode_LinearRing in xmlNodeList_LinearRing)
                         {
-                            if (xmlNode_LinearRing.LocalName == Constans.XmlNode.Name.LinearRing)
+                            if (xmlNode_LinearRing.LocalName == Constants.XmlNode.Name.LinearRing)
                             {
                                 IPolygonal3D? externalEdge_Temp = ToCityGML_Polygon3D(xmlNode_LinearRing);
                                 if (externalEdge_Temp != null)
@@ -53,7 +53,7 @@ namespace DiGi.CityGML
                         }
                     }
                 }
-                else if (xmlNode_Temp.LocalName == Constans.XmlNode.Name.Interior)
+                else if (xmlNode_Temp.LocalName == Constants.XmlNode.Name.Interior)
                 {
                     internalEdge3Ds = [];
 
@@ -62,7 +62,7 @@ namespace DiGi.CityGML
                     {
                         foreach (XmlNode xmlNode_LinearRing in xmlNodeList_LinearRing)
                         {
-                            if (xmlNode_LinearRing.LocalName == Constans.XmlNode.Name.LinearRing)
+                            if (xmlNode_LinearRing.LocalName == Constants.XmlNode.Name.LinearRing)
                             {
                                 IPolygonal3D? internalEdge_Temp = ToCityGML_Polygon3D(xmlNode_LinearRing);
                                 if (internalEdge_Temp != null)

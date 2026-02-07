@@ -24,7 +24,7 @@ namespace DiGi.CityGML
                 {
                     string? name = xmlNode_Temp?.LocalName;
 
-                    if (name == Constans.XmlNode.Name.CityObjectMember)
+                    if (name == Constants.XmlNode.Name.CityObjectMember)
                     {
                         Building? building = ToCityGML_Building(xmlNode_Temp);
                         if (building != null)

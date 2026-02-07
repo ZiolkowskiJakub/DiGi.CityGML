@@ -43,7 +43,7 @@ namespace DiGi.CityGML
                     continue;
                 }
 
-                if (name == Constans.XmlNode.Name.CityModel)
+                if (name == Constants.XmlNode.Name.CityModel)
                 {
                     result = Convert.ToCityGML_CityModel(xmlNodeList[i]);
                     if (result != null)

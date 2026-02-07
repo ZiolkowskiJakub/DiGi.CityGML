@@ -28,9 +28,9 @@ namespace DiGi.CityGML
 
             return xmlNode.LocalName switch
             {
-                Constans.XmlNode.Name.RoofSurface => new RoofSurface(uniqueId, polygonalFace3D),
-                Constans.XmlNode.Name.WallSurface => new WallSurface(uniqueId, polygonalFace3D),
-                Constans.XmlNode.Name.GroundSurface => new GroundSurface(uniqueId, polygonalFace3D),
+                Constants.XmlNode.Name.RoofSurface => new RoofSurface(uniqueId, polygonalFace3D),
+                Constants.XmlNode.Name.WallSurface => new WallSurface(uniqueId, polygonalFace3D),
+                Constants.XmlNode.Name.GroundSurface => new GroundSurface(uniqueId, polygonalFace3D),
                 _ => new UndefinedSurface(uniqueId, polygonalFace3D),
             };
         }

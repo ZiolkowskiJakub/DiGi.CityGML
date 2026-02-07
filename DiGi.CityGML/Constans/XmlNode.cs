@@ -1,4 +1,4 @@
-﻿namespace DiGi.CityGML.Constans
+﻿namespace DiGi.CityGML.Constants
 {
     public static class XmlNode
     {

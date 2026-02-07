@@ -15,7 +15,7 @@ namespace DiGi.CityGML
             }
 
             List<Point3D>? point3Ds;
-            if (xmlNodeList.Count == 1 && xmlNodeList[0].LocalName == Constans.XmlNode.Name.PosList)
+            if (xmlNodeList.Count == 1 && xmlNodeList[0].LocalName == Constants.XmlNode.Name.PosList)
             {
                 point3Ds = ToCityGML_Point3Ds(xmlNodeList[0]);
             }
@@ -25,7 +25,7 @@ namespace DiGi.CityGML
 
                 foreach (XmlNode xmlNode_Temp in xmlNodeList)
                 {
-                    if (xmlNode_Temp.LocalName != Constans.XmlNode.Name.Pos)
+                    if (xmlNode_Temp.LocalName != Constants.XmlNode.Name.Pos)
                     {
                         continue;
                     }

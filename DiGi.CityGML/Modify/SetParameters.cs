@@ -24,9 +24,9 @@ namespace DiGi.CityGML
             bool result = false;
             foreach (XmlNode xmlNode_Temp in xmlNodeList)
             {
-                if (xmlNode_Temp.LocalName == Constans.XmlNode.Name.StringAttribute)
+                if (xmlNode_Temp.LocalName == Constants.XmlNode.Name.StringAttribute)
                 {
-                    string? value = xmlNode_Temp.Attributes[Constans.XmlAttribute.Name.AttributeName]?.Value;
+                    string? value = xmlNode_Temp.Attributes[Constants.XmlAttribute.Name.AttributeName]?.Value;
                     if (string.IsNullOrWhiteSpace(value))
                     {
                         continue;
@@ -36,7 +36,7 @@ namespace DiGi.CityGML
                     {
                         if (value == buildingParameter.ToString())
                         {
-                            XmlNode? xmlNode_Value = xmlNode_Temp.ChildNodes.Cast<XmlNode>().ToList()?.Find(x => x.LocalName == Constans.XmlNode.Name.Value);
+                            XmlNode? xmlNode_Value = xmlNode_Temp.ChildNodes.Cast<XmlNode>().ToList()?.Find(x => x.LocalName == Constants.XmlNode.Name.Value);
                             if (xmlNode_Value != null)
                             {
                                 building.SetValue(buildingParameter, xmlNode_Value.InnerText);

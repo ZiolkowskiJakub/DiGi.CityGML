@@ -13,7 +13,7 @@ namespace DiGi.CityGML
 
             foreach (XmlAttribute xmlAttribute in xmlNode.Attributes)
             {
-                if (xmlAttribute?.LocalName == Constans.XmlAttribute.Name.Id)
+                if (xmlAttribute?.LocalName == Constants.XmlAttribute.Name.Id)
                 {
                     return xmlAttribute.InnerText;
                 }

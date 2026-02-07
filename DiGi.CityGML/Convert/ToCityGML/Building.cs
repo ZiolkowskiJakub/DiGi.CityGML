@@ -20,11 +20,11 @@ namespace DiGi.CityGML
                 return null;
             }
 
-            if (xmlNode.LocalName != Constans.XmlNode.Name.Building)
+            if (xmlNode.LocalName != Constants.XmlNode.Name.Building)
             {
                 foreach (XmlNode xmlNode_Temp in xmlNodeList)
                 {
-                    if (xmlNode_Temp.LocalName == Constans.XmlNode.Name.Building)
+                    if (xmlNode_Temp.LocalName == Constants.XmlNode.Name.Building)
                     {
                         return ToCityGML_Building(xmlNode_Temp);
                     }
@@ -40,14 +40,14 @@ namespace DiGi.CityGML
 
             foreach (XmlNode xmlNode_Temp in xmlNodeList)
             {
-                if (xmlNode_Temp.LocalName == Constans.XmlNode.Name.RoofType)
+                if (xmlNode_Temp.LocalName == Constants.XmlNode.Name.RoofType)
                 {
                     if (int.TryParse(xmlNode_Temp.InnerText, out int roofTypeId_Temp))
                     {
                         roofTypeId = roofTypeId_Temp;
                     }
                 }
-                else if (xmlNode_Temp.LocalName == Constans.XmlNode.Name.BoundedBy)
+                else if (xmlNode_Temp.LocalName == Constants.XmlNode.Name.BoundedBy)
                 {
                     XmlNodeList xmlNodeList_Surface = xmlNode_Temp.ChildNodes;
                     if (xmlNodeList_Surface == null || xmlNodeList_Surface.Count == 0)
@@ -74,7 +74,7 @@ namespace DiGi.CityGML
             {
                 foreach (XmlNode xmlNode_Temp in xmlNodeList)
                 {
-                    if (xmlNode_Temp.LocalName == Constans.XmlNode.Name.LOD1Solid)
+                    if (xmlNode_Temp.LocalName == Constants.XmlNode.Name.LOD1Solid)
                     {
                         XmlNodeList xmlNodeList_Solid = xmlNode_Temp.ChildNodes;
                         if (xmlNodeList_Solid == null || xmlNodeList_Solid.Count == 0)
