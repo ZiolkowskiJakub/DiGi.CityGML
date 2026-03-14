@@ -6,7 +6,7 @@ namespace DiGi.CityGML
 {
     public static partial class Convert
     {
-        public static IPolygonalFace3D? ToCityGML_PolygonalFace3D(XmlNode? xmlNode, double tolerance = Core.Constants.Tolerance.Distance)
+        public static IPolygonalFace3D? ToCityGML_PolygonalFace3D(XmlNode? xmlNode, double tolerance = Core.Constans.Tolerance.Distance)
         {
             XmlNodeList? xmlNodeList = xmlNode?.ChildNodes;
             if (xmlNodeList == null || xmlNodeList.Count == 0)
