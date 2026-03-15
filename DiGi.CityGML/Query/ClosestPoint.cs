@@ -9,7 +9,7 @@ namespace DiGi.CityGML
 {
     public static partial class Query
     {
-        public static Point3D? ClosestPoint(this Building? building, Point3D? point3D, double tolerance = Core.Constans.Tolerance.Distance)
+        public static Point3D? ClosestPoint(this Building? building, Point3D? point3D)
         {
             if (building == null || point3D == null)
             {
