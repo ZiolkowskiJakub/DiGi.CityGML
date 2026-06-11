@@ -1,4 +1,4 @@
-﻿using DiGi.CityGML.Classes;
+using DiGi.CityGML.Classes;
 using DiGi.CityGML.Enums;
 using System;
 using System.Linq;
@@ -8,6 +8,12 @@ namespace DiGi.CityGML
 {
     public static partial class Create
     {
+        /// <summary>
+        /// Sets the parameters of a building instance by parsing the provided XML node for attribute names and values that match known building parameters.
+        /// </summary>
+        /// <param name="building">The <see cref="Building"/> instance to be updated.</param>
+        /// <param name="xmlNode">The <see cref="XmlNode"/> containing the parameter data to process.</param>
+        /// <returns>True if at least one building parameter was successfully identified and set; otherwise, false.</returns>
         public static bool SetParameters(this Building? building, XmlNode? xmlNode)
         {
             if (building == null || xmlNode == null)

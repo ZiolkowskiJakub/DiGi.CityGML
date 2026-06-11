@@ -1,4 +1,4 @@
-﻿using DiGi.Geometry.Spatial.Classes;
+using DiGi.Geometry.Spatial.Classes;
 using System.Collections.Generic;
 using System.Xml;
 
@@ -6,6 +6,11 @@ namespace DiGi.CityGML
 {
     public static partial class Convert
     {
+        /// <summary>
+        /// Converts an XML node representing a CityGML polygon into a <see cref="Polygon3D"/> object.
+        /// </summary>
+        /// <param name="xmlNode">The XML node containing the polygon data, which may consist of a position list or individual position elements.</param>
+        /// <returns>A <see cref="Polygon3D"/> instance if the conversion is successful and at least three points are defined; otherwise, <c>null</c>.</returns>
         public static Polygon3D? ToCityGML_Polygon3D(XmlNode? xmlNode)
         {
             XmlNodeList? xmlNodeList = xmlNode?.ChildNodes;

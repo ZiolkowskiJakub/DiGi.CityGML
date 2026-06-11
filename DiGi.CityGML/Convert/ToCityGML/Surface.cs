@@ -1,4 +1,4 @@
-﻿using DiGi.CityGML.Classes;
+using DiGi.CityGML.Classes;
 using DiGi.CityGML.Interfaces;
 using DiGi.Geometry.Spatial.Interfaces;
 using System.Xml;
@@ -7,6 +7,11 @@ namespace DiGi.CityGML
 {
     public static partial class Convert
     {
+        /// <summary>
+        /// Converts an XML node to a CityGML surface implementation based on the node's local name and content.
+        /// </summary>
+        /// <param name="xmlNode">The XML node to be converted into a surface.</param>
+        /// <returns>An instance of <see cref="ISurface"/> (such as RoofSurface, WallSurface, or GroundSurface) if the conversion is successful; otherwise, <c>null</c>.</returns>
         public static ISurface? ToCityGML_Surface(XmlNode? xmlNode)
         {
             if (xmlNode == null)

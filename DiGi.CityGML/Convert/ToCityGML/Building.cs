@@ -1,4 +1,4 @@
-﻿using DiGi.CityGML.Classes;
+using DiGi.CityGML.Classes;
 using DiGi.CityGML.Interfaces;
 using System.Collections.Generic;
 using System.Xml;
@@ -7,6 +7,11 @@ namespace DiGi.CityGML
 {
     public static partial class Convert
     {
+        /// <summary>
+        /// Converts an XML node to a CityGML Building object.
+        /// </summary>
+        /// <param name="xmlNode">The XML node containing the building data.</param>
+        /// <returns>A <see cref="Building"/> instance if the conversion is successful; otherwise, null.</returns>
         public static Building? ToCityGML_Building(XmlNode? xmlNode)
         {
             if (xmlNode == null)

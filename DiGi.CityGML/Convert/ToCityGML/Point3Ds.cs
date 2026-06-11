@@ -1,4 +1,4 @@
-﻿using DiGi.Geometry.Spatial.Classes;
+using DiGi.Geometry.Spatial.Classes;
 using System.Collections.Generic;
 using System.Xml;
 
@@ -6,6 +6,11 @@ namespace DiGi.CityGML
 {
     public static partial class Convert
     {
+        /// <summary>
+        /// Converts an XML node containing a space-separated string of coordinates into a list of <see cref="Point3D"/> objects.
+        /// </summary>
+        /// <param name="xmlNode">The XML node to be parsed for coordinate data.</param>
+        /// <returns>A list of <see cref="Point3D"/> instances if the input is valid and contains coordinates; otherwise, <c>null</c>.</returns>
         public static List<Point3D>? ToCityGML_Point3Ds(XmlNode? xmlNode)
         {
             string? innerText = xmlNode?.InnerText;

@@ -1,4 +1,4 @@
-﻿using DiGi.Geometry.Spatial.Interfaces;
+using DiGi.Geometry.Spatial.Interfaces;
 using System.Collections.Generic;
 using System.Xml;
 
@@ -6,6 +6,12 @@ namespace DiGi.CityGML
 {
     public static partial class Convert
     {
+        /// <summary>
+        /// Converts an XML node representing a CityGML polygonal face into an <see cref="IPolygonalFace3D"/> instance.
+        /// </summary>
+        /// <param name="xmlNode">The XML node to be converted.</param>
+        /// <param name="tolerance">The distance tolerance used for geometric processing. Defaults to <see cref="Core.Constants.Tolerance.Distance"/>.</param>
+        /// <returns>An <see cref="IPolygonalFace3D"/> object if the conversion is successful; otherwise, <c>null</c>.</returns>
         public static IPolygonalFace3D? ToCityGML_PolygonalFace3D(XmlNode? xmlNode, double tolerance = Core.Constants.Tolerance.Distance)
         {
             XmlNodeList? xmlNodeList = xmlNode?.ChildNodes;

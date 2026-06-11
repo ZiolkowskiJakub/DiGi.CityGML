@@ -1,4 +1,4 @@
-﻿using DiGi.CityGML.Classes;
+using DiGi.CityGML.Classes;
 using DiGi.CityGML.Interfaces;
 using DiGi.Geometry.Spatial.Classes;
 using DiGi.Geometry.Spatial.Interfaces;
@@ -9,6 +9,12 @@ namespace DiGi.CityGML
 {
     public static partial class Query
     {
+        /// <summary>
+        /// Calculates the point on the surfaces of the specified building that is closest to the provided 3D point.
+        /// </summary>
+        /// <param name="building">The building instance whose surfaces are analyzed to find the nearest point.</param>
+        /// <param name="point3D">The reference 3D point used for the distance calculation.</param>
+        /// <returns>The closest <see cref="Point3D"/> found across all surfaces of the building, or <c>null</c> if the building is null, the point is null, or no valid surfaces exist.</returns>
         public static Point3D? ClosestPoint(this Building? building, Point3D? point3D)
         {
             if (building == null || point3D == null)

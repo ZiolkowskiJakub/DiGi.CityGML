@@ -1,4 +1,4 @@
-﻿using DiGi.CityGML.Classes;
+using DiGi.CityGML.Classes;
 using DiGi.CityGML.Interfaces;
 using DiGi.Geometry.Spatial.Classes;
 using System.Collections.Generic;
@@ -8,6 +8,11 @@ namespace DiGi.CityGML
 {
     public static partial class Query
     {
+        /// <summary>
+        /// Calculates the 3D bounding box for the specified building by aggregating the bounding boxes of its constituent surfaces.
+        /// </summary>
+        /// <param name="building">The building instance from which to calculate the spatial extent.</param>
+        /// <returns>A <see cref="BoundingBox3D"/> representing the total volume encompassing all surfaces, or <c>null</c> if the building is null or contains no valid geometry.</returns>
         public static BoundingBox3D? BoundingBox(this Building? building)
         {
             IEnumerable<ISurface>? surfaces = building?.Surfaces;

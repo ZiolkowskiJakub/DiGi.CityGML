@@ -1,10 +1,15 @@
-﻿using DiGi.Geometry.Spatial.Classes;
+using DiGi.Geometry.Spatial.Classes;
 using System.Xml;
 
 namespace DiGi.CityGML
 {
     public static partial class Convert
     {
+        /// <summary>
+        /// Converts an XML node containing coordinate strings into a <see cref="Point3D"/> object.
+        /// </summary>
+        /// <param name="xmlNode">The XML node to be parsed for 3D point coordinates.</param>
+        /// <returns>A <see cref="Point3D"/> instance if the parsing is successful; otherwise, <c>null</c>.</returns>
         public static Point3D? ToCityGML_Point3D(XmlNode xmlNode)
         {
             string? innerText = xmlNode?.InnerText;
