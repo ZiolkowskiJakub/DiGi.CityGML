@@ -14,11 +14,11 @@ namespace DiGi.CityGML
         /// It supports individual files, ZIP archives, and directories containing ZIP archives, 
         /// attempting to infer the Level of Detail (LOD) and year from the folder hierarchy.
         /// </summary>
-        /// <param name="path">The system path to the file or directory to process.</param>
+        /// <param name="pathOrDirectory">The system path to the file or directory to process. Directory with subfolders [LOD]\[YEAR]\*.zip containing ZIP archives.</param>
         /// <returns>A list of <see cref="Classes.CityModel"/> objects if successful; otherwise, null.</returns>
-        public static List<CityModel>? CityModels(string? path)
+        public static List<CityModel>? CityModels(string? pathOrDirectory)
         {
-            if (string.IsNullOrWhiteSpace(path))
+            if (string.IsNullOrWhiteSpace(pathOrDirectory))
             {
                 return null;
             }
@@ -27,30 +27,30 @@ namespace DiGi.CityGML
 
             List<CityModel>? result = null;
 
-            if (File.Exists(path))
+            if (File.Exists(pathOrDirectory))
             {
-                if (Path.GetExtension(path) == ".zip")
+                if (Path.GetExtension(pathOrDirectory) == ".zip")
                 {
-                    paths_Zip = [path!];
+                    paths_Zip = [pathOrDirectory!];
                 }
                 else
                 {
                     LOD? lOD = null;
                     int? year = null;
 
-                    string yearString = Path.GetFileName(Path.GetDirectoryName(path));
+                    string yearString = Path.GetFileName(Path.GetDirectoryName(pathOrDirectory));
                     if (!string.IsNullOrWhiteSpace(yearString) && int.TryParse(yearString.Trim(), out int year_Temp))
                     {
                         year = year_Temp;
                     }
 
-                    string lODString = Path.GetFileName(Path.GetDirectoryName(Path.GetDirectoryName(path)));
+                    string lODString = Path.GetFileName(Path.GetDirectoryName(Path.GetDirectoryName(pathOrDirectory)));
                     if (!string.IsNullOrWhiteSpace(lODString) && Enum.TryParse(lODString, out LOD lOD_Temp))
                     {
                         lOD = lOD_Temp;
                     }
 
-                    CityModel? cityModel = CityModel(path, lOD, year);
+                    CityModel? cityModel = CityModel(pathOrDirectory, lOD, year);
                     if (cityModel != null)
                     {
                         result = [cityModel];
@@ -59,9 +59,9 @@ namespace DiGi.CityGML
                     return result;
                 }
             }
-            else if (Directory.Exists(path))
+            else if (Directory.Exists(pathOrDirectory))
             {
-                paths_Zip = Directory.GetFiles(path, "*.zip");
+                paths_Zip = Directory.GetFiles(pathOrDirectory, "*.zip");
             }
 
             if (paths_Zip == null || paths_Zip.Length == 0)

@@ -286,15 +286,15 @@ It supports individual files, ZIP archives, and directories containing ZIP archi
 attempting to infer the Level of Detail \(LOD\) and year from the folder hierarchy\.
 
 ```csharp
-public static System.Collections.Generic.List<DiGi.CityGML.Classes.CityModel>? CityModels(string? path);
+public static System.Collections.Generic.List<DiGi.CityGML.Classes.CityModel>? CityModels(string? pathOrDirectory);
 ```
 #### Parameters
 
-<a name='DiGi.CityGML.Create.CityModels(string).path'></a>
+<a name='DiGi.CityGML.Create.CityModels(string).pathOrDirectory'></a>
 
-`path` [System\.String](https://learn.microsoft.com/en-us/dotnet/api/system.string 'System\.String')
+`pathOrDirectory` [System\.String](https://learn.microsoft.com/en-us/dotnet/api/system.string 'System\.String')
 
-The system path to the file or directory to process\.
+The system path to the file or directory to process\. Directory with subfolders \[LOD\]\\\[YEAR\]\\\*\.zip containing ZIP archives\.
 
 #### Returns
 [System\.Collections\.Generic\.List&lt;](https://learn.microsoft.com/en-us/dotnet/api/system.collections.generic.list-1 'System\.Collections\.Generic\.List\`1')[CityModel](DiGi.CityGML.Classes.md#DiGi.CityGML.Classes.CityModel 'DiGi\.CityGML\.Classes\.CityModel')[&gt;](https://learn.microsoft.com/en-us/dotnet/api/system.collections.generic.list-1 'System\.Collections\.Generic\.List\`1')  
