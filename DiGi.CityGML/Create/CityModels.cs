@@ -1,9 +1,5 @@
 using DiGi.CityGML.Classes;
-using DiGi.CityGML.Enums;
-using System;
 using System.Collections.Generic;
-using System.IO;
-using System.IO.Compression;
 
 namespace DiGi.CityGML
 {
@@ -23,87 +19,19 @@ namespace DiGi.CityGML
                 return null;
             }
 
-            string[]? paths_Zip = null;
+            List<CityModel>? result = [];
 
-            List<CityModel>? result = null;
-
-            if (File.Exists(pathOrDirectory))
+            bool succeded = Query.Run(pathOrDirectory, (path, cityModel) =>
             {
-                if (Path.GetExtension(pathOrDirectory) == ".zip")
+                if(cityModel is not null)
                 {
-                    paths_Zip = [pathOrDirectory!];
-                }
-                else
-                {
-                    LOD? lOD = null;
-                    int? year = null;
-
-                    string yearString = Path.GetFileName(Path.GetDirectoryName(pathOrDirectory));
-                    if (!string.IsNullOrWhiteSpace(yearString) && int.TryParse(yearString.Trim(), out int year_Temp))
-                    {
-                        year = year_Temp;
-                    }
-
-                    string lODString = Path.GetFileName(Path.GetDirectoryName(Path.GetDirectoryName(pathOrDirectory)));
-                    if (!string.IsNullOrWhiteSpace(lODString) && Enum.TryParse(lODString, out LOD lOD_Temp))
-                    {
-                        lOD = lOD_Temp;
-                    }
-
-                    CityModel? cityModel = CityModel(pathOrDirectory, lOD, year);
-                    if (cityModel != null)
-                    {
-                        result = [cityModel];
-                    }
-
-                    return result;
-                }
-            }
-            else if (Directory.Exists(pathOrDirectory))
-            {
-                paths_Zip = Directory.GetFiles(pathOrDirectory, "*.zip");
-            }
-
-            if (paths_Zip == null || paths_Zip.Length == 0)
-            {
-                return null;
-            }
-
-            result = [];
-            foreach (string path_Zip in paths_Zip)
-            {
-                LOD? lOD = null;
-                int? year = null;
-
-                string yearString = Path.GetFileName(Path.GetDirectoryName(path_Zip));
-                if (!string.IsNullOrWhiteSpace(yearString) && int.TryParse(yearString.Trim(), out int year_Temp))
-                {
-                    year = year_Temp;
-                }
-
-                string lODString = Path.GetFileName(Path.GetDirectoryName(Path.GetDirectoryName(path_Zip)));
-                if (!string.IsNullOrWhiteSpace(lODString) && Enum.TryParse(lODString, out LOD lOD_Temp))
-                {
-                    lOD = lOD_Temp;
-                }
-
-                using ZipArchive zipArchive = ZipFile.OpenRead(path_Zip);
-
-                foreach (ZipArchiveEntry zipArchiveEntry in zipArchive.Entries)
-                {
-                    if (zipArchiveEntry.Open() is not DeflateStream)
-                    {
-                        continue;
-                    }
-
-                    CityModel? cityModel = CityModel(zipArchiveEntry.Open(), lOD, year);
-                    if (cityModel == null)
-                    {
-                        continue;
-                    }
-
                     result.Add(cityModel);
                 }
+            });
+
+            if (!succeded)
+            {
+                return null;
             }
 
             return result;
