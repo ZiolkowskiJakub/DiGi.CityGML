@@ -44,7 +44,7 @@ namespace DiGi.CityGML
                     }
 
                     string lODString = Path.GetFileName(Path.GetDirectoryName(Path.GetDirectoryName(pathOrDirectory)));
-                    if (!string.IsNullOrWhiteSpace(lODString) && Enum.TryParse(lODString, out LOD lOD_Temp))
+                    if (!string.IsNullOrWhiteSpace(lODString) && Enum.TryParse(lODString, true, out LOD lOD_Temp))
                     {
                         lOD = lOD_Temp;
                     }
@@ -76,7 +76,7 @@ namespace DiGi.CityGML
                 }
 
                 string lODString = Path.GetFileName(Path.GetDirectoryName(Path.GetDirectoryName(path_Zip)));
-                if (!string.IsNullOrWhiteSpace(lODString) && Enum.TryParse(lODString, out LOD lOD_Temp))
+                if (!string.IsNullOrWhiteSpace(lODString) && Enum.TryParse(lODString, true, out LOD lOD_Temp))
                 {
                     lOD = lOD_Temp;
                 }
@@ -84,7 +84,7 @@ namespace DiGi.CityGML
                 if (lOD is null && year is null)
                 {
                     lODString = Path.GetFileName(Path.GetDirectoryName(path_Zip));
-                    if (!string.IsNullOrWhiteSpace(lODString) && Enum.TryParse(lODString, out lOD_Temp))
+                    if (!string.IsNullOrWhiteSpace(lODString) && Enum.TryParse(lODString, true, out lOD_Temp))
                     {
                         lOD = lOD_Temp;
                     }

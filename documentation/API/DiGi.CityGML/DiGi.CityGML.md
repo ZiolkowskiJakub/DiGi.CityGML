@@ -411,7 +411,7 @@ A [Polyhedron\(this Building\)](DiGi.CityGML.md#DiGi.CityGML.Query.Polyhedron(th
 
 ## Query\.Reference\(this Building\) Method
 
-Extracts and cleans the reference identifier from a building's unique ID, 
+Extracts and cleans the reference identifier from buildingId or building's unique ID, 
 removing specific prefixes such as "ID\-" if present\.
 
 ```csharp
@@ -427,7 +427,7 @@ The [Building](DiGi.CityGML.Classes.md#DiGi.CityGML.Classes.Building 'DiGi\.City
 
 #### Returns
 [System\.String](https://learn.microsoft.com/en-us/dotnet/api/system.string 'System\.String')  
-A trimmed string containing the processed reference identifier, or null if the building or its unique ID is null\.
+A trimmed string containing buildingId or the processed reference identifier, or null if the building or its unique ID is null\.
 
 <a name='DiGi.CityGML.Query.Run(string,System.Action_string,DiGi.CityGML.Classes.CityModel_)'></a>
 
