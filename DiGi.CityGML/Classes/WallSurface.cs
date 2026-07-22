@@ -1,4 +1,4 @@
-using DiGi.Geometry.Spatial.Interfaces;
+﻿using DiGi.Geometry.Spatial.Interfaces;
 using System.Text.Json.Nodes;
 
 namespace DiGi.CityGML.Classes
@@ -32,7 +32,19 @@ namespace DiGi.CityGML.Classes
         /// <param name="uniqueId">The unique identifier for the wall surface.</param>
         /// <param name="geometry">The polygonal 3D face representing the geometry of the wall surface.</param>
         public WallSurface(string? uniqueId, IPolygonalFace3D? geometry)
-            : base(uniqueId, geometry)
+            : base(uniqueId, geometry, true)
+        {
+        }
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="WallSurface"/> class with a specified unique identifier and geometry, optionally adopting the geometry instead of cloning it.
+        /// <para>Internal because adopting is only safe for freshly built, unshared geometry - the parse path in <see cref="Convert"/>. Every public entry point clones.</para>
+        /// </summary>
+        /// <param name="uniqueId">The unique identifier for the wall surface.</param>
+        /// <param name="geometry">The 3D polygonal face geometry associated with the wall surface.</param>
+        /// <param name="clone">True to store a defensive copy of <paramref name="geometry"/>; false to take ownership of the instance as given.</param>
+        internal WallSurface(string? uniqueId, IPolygonalFace3D? geometry, bool clone)
+            : base(uniqueId, geometry, clone)
         {
         }
     }

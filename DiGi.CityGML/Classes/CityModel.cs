@@ -49,11 +49,29 @@ namespace DiGi.CityGML.Classes
         /// </summary>
         /// <param name="buildings">The collection of buildings to associate with this city model.</param>
         public CityModel(IEnumerable<Building>? buildings)
+            : this(buildings, true)
+        {
+        }
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="CityModel"/> class with a specified collection of buildings, optionally adopting them instead of cloning them.
+        /// <para>Internal because adopting is only safe for freshly built, unshared buildings - the parse path in <see cref="Convert"/>. Every public entry point clones.</para>
+        /// </summary>
+        /// <param name="buildings">The collection of buildings to associate with this city model.</param>
+        /// <param name="clone">True to store defensive copies of <paramref name="buildings"/>; false to take ownership of the instances as given.</param>
+        internal CityModel(IEnumerable<Building>? buildings, bool clone)
             : base()
         {
             if (buildings != null)
             {
-                Buildings = buildings;
+                if (clone)
+                {
+                    Buildings = buildings;
+                }
+                else
+                {
+                    Adopt(buildings);
+                }
             }
         }
 
@@ -85,6 +103,29 @@ namespace DiGi.CityGML.Classes
                     {
                         buildings[building_Temp!.UniqueId!] = building_Temp;
                     }
+                }
+            }
+        }
+
+        /// <summary>
+        /// Stores the given buildings without cloning them, taking ownership of the instances as given.
+        /// </summary>
+        /// <param name="buildings">The buildings to adopt.</param>
+        private void Adopt(IEnumerable<Building>? buildings)
+        {
+            this.buildings = null;
+
+            if (buildings == null)
+            {
+                return;
+            }
+
+            this.buildings = [];
+            foreach (Building building in buildings)
+            {
+                if (!string.IsNullOrEmpty(building?.UniqueId))
+                {
+                    this.buildings[building!.UniqueId!] = building;
                 }
             }
         }

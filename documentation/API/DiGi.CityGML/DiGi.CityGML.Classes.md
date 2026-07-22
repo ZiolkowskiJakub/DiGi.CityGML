@@ -64,6 +64,43 @@ The identifier representing the type of the roof\.
 
 A collection of surfaces associated with the building\.
 
+<a name='DiGi.CityGML.Classes.Building.Building(string,int,System.Collections.Generic.IEnumerable_DiGi.CityGML.Interfaces.ISurface_,bool)'></a>
+
+## Building\(string, int, IEnumerable\<ISurface\>, bool\) Constructor
+
+Initializes a new instance of the [Building](DiGi.CityGML.Classes.md#DiGi.CityGML.Classes.Building 'DiGi\.CityGML\.Classes\.Building') class with specified unique identifier, roof type ID, and surfaces, optionally adopting the surfaces instead of cloning them\.
+
+Internal because adopting is only safe for freshly built, unshared surfaces - the parse path in [Convert](DiGi.CityGML.md#DiGi.CityGML.Convert 'DiGi\.CityGML\.Convert'). Every public entry point clones.
+
+```csharp
+internal Building(string? uniqueId, int roofTypeId, System.Collections.Generic.IEnumerable<DiGi.CityGML.Interfaces.ISurface>? surfaces, bool clone);
+```
+#### Parameters
+
+<a name='DiGi.CityGML.Classes.Building.Building(string,int,System.Collections.Generic.IEnumerable_DiGi.CityGML.Interfaces.ISurface_,bool).uniqueId'></a>
+
+`uniqueId` [System\.String](https://learn.microsoft.com/en-us/dotnet/api/system.string 'System\.String')
+
+The unique identifier for the building\.
+
+<a name='DiGi.CityGML.Classes.Building.Building(string,int,System.Collections.Generic.IEnumerable_DiGi.CityGML.Interfaces.ISurface_,bool).roofTypeId'></a>
+
+`roofTypeId` [System\.Int32](https://learn.microsoft.com/en-us/dotnet/api/system.int32 'System\.Int32')
+
+The identifier representing the type of the roof\.
+
+<a name='DiGi.CityGML.Classes.Building.Building(string,int,System.Collections.Generic.IEnumerable_DiGi.CityGML.Interfaces.ISurface_,bool).surfaces'></a>
+
+`surfaces` [System\.Collections\.Generic\.IEnumerable&lt;](https://learn.microsoft.com/en-us/dotnet/api/system.collections.generic.ienumerable-1 'System\.Collections\.Generic\.IEnumerable\`1')[ISurface](DiGi.CityGML.Interfaces.md#DiGi.CityGML.Interfaces.ISurface 'DiGi\.CityGML\.Interfaces\.ISurface')[&gt;](https://learn.microsoft.com/en-us/dotnet/api/system.collections.generic.ienumerable-1 'System\.Collections\.Generic\.IEnumerable\`1')
+
+A collection of surfaces associated with the building\.
+
+<a name='DiGi.CityGML.Classes.Building.Building(string,int,System.Collections.Generic.IEnumerable_DiGi.CityGML.Interfaces.ISurface_,bool).clone'></a>
+
+`clone` [System\.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean 'System\.Boolean')
+
+True to store defensive copies of [surfaces](DiGi.CityGML.Classes.md#DiGi.CityGML.Classes.Building.Building(string,int,System.Collections.Generic.IEnumerable_DiGi.CityGML.Interfaces.ISurface_,bool).surfaces 'DiGi\.CityGML\.Classes\.Building\.Building\(string, int, System\.Collections\.Generic\.IEnumerable\<DiGi\.CityGML\.Interfaces\.ISurface\>, bool\)\.surfaces'); false to take ownership of the instances as given\.
+
 <a name='DiGi.CityGML.Classes.Building.Building(System.Text.Json.Nodes.JsonObject)'></a>
 
 ## Building\(JsonObject\) Constructor
@@ -107,6 +144,24 @@ public System.Collections.Generic.IEnumerable<DiGi.CityGML.Interfaces.ISurface>?
 
 #### Property Value
 [System\.Collections\.Generic\.IEnumerable&lt;](https://learn.microsoft.com/en-us/dotnet/api/system.collections.generic.ienumerable-1 'System\.Collections\.Generic\.IEnumerable\`1')[ISurface](DiGi.CityGML.Interfaces.md#DiGi.CityGML.Interfaces.ISurface 'DiGi\.CityGML\.Interfaces\.ISurface')[&gt;](https://learn.microsoft.com/en-us/dotnet/api/system.collections.generic.ienumerable-1 'System\.Collections\.Generic\.IEnumerable\`1')
+### Methods
+
+<a name='DiGi.CityGML.Classes.Building.Adopt(System.Collections.Generic.IEnumerable_DiGi.CityGML.Interfaces.ISurface_)'></a>
+
+## Building\.Adopt\(IEnumerable\<ISurface\>\) Method
+
+Stores the given surfaces without cloning them, taking ownership of the instances as given\.
+
+```csharp
+private void Adopt(System.Collections.Generic.IEnumerable<DiGi.CityGML.Interfaces.ISurface>? surfaces);
+```
+#### Parameters
+
+<a name='DiGi.CityGML.Classes.Building.Adopt(System.Collections.Generic.IEnumerable_DiGi.CityGML.Interfaces.ISurface_).surfaces'></a>
+
+`surfaces` [System\.Collections\.Generic\.IEnumerable&lt;](https://learn.microsoft.com/en-us/dotnet/api/system.collections.generic.ienumerable-1 'System\.Collections\.Generic\.IEnumerable\`1')[ISurface](DiGi.CityGML.Interfaces.md#DiGi.CityGML.Interfaces.ISurface 'DiGi\.CityGML\.Interfaces\.ISurface')[&gt;](https://learn.microsoft.com/en-us/dotnet/api/system.collections.generic.ienumerable-1 'System\.Collections\.Generic\.IEnumerable\`1')
+
+The surfaces to adopt\.
 
 <a name='DiGi.CityGML.Classes.CityModel'></a>
 
@@ -167,6 +222,31 @@ public CityModel(System.Collections.Generic.IEnumerable<DiGi.CityGML.Classes.Bui
 
 The collection of buildings to associate with this city model\.
 
+<a name='DiGi.CityGML.Classes.CityModel.CityModel(System.Collections.Generic.IEnumerable_DiGi.CityGML.Classes.Building_,bool)'></a>
+
+## CityModel\(IEnumerable\<Building\>, bool\) Constructor
+
+Initializes a new instance of the [CityModel](DiGi.CityGML.Classes.md#DiGi.CityGML.Classes.CityModel 'DiGi\.CityGML\.Classes\.CityModel') class with a specified collection of buildings, optionally adopting them instead of cloning them\.
+
+Internal because adopting is only safe for freshly built, unshared buildings - the parse path in [Convert](DiGi.CityGML.md#DiGi.CityGML.Convert 'DiGi\.CityGML\.Convert'). Every public entry point clones.
+
+```csharp
+internal CityModel(System.Collections.Generic.IEnumerable<DiGi.CityGML.Classes.Building>? buildings, bool clone);
+```
+#### Parameters
+
+<a name='DiGi.CityGML.Classes.CityModel.CityModel(System.Collections.Generic.IEnumerable_DiGi.CityGML.Classes.Building_,bool).buildings'></a>
+
+`buildings` [System\.Collections\.Generic\.IEnumerable&lt;](https://learn.microsoft.com/en-us/dotnet/api/system.collections.generic.ienumerable-1 'System\.Collections\.Generic\.IEnumerable\`1')[Building](DiGi.CityGML.Classes.md#DiGi.CityGML.Classes.Building 'DiGi\.CityGML\.Classes\.Building')[&gt;](https://learn.microsoft.com/en-us/dotnet/api/system.collections.generic.ienumerable-1 'System\.Collections\.Generic\.IEnumerable\`1')
+
+The collection of buildings to associate with this city model\.
+
+<a name='DiGi.CityGML.Classes.CityModel.CityModel(System.Collections.Generic.IEnumerable_DiGi.CityGML.Classes.Building_,bool).clone'></a>
+
+`clone` [System\.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean 'System\.Boolean')
+
+True to store defensive copies of [buildings](DiGi.CityGML.Classes.md#DiGi.CityGML.Classes.CityModel.CityModel(System.Collections.Generic.IEnumerable_DiGi.CityGML.Classes.Building_,bool).buildings 'DiGi\.CityGML\.Classes\.CityModel\.CityModel\(System\.Collections\.Generic\.IEnumerable\<DiGi\.CityGML\.Classes\.Building\>, bool\)\.buildings'); false to take ownership of the instances as given\.
+
 <a name='DiGi.CityGML.Classes.CityModel.CityModel(System.Text.Json.Nodes.JsonObject)'></a>
 
 ## CityModel\(JsonObject\) Constructor
@@ -197,6 +277,24 @@ public System.Collections.Generic.IEnumerable<DiGi.CityGML.Classes.Building>? Bu
 
 #### Property Value
 [System\.Collections\.Generic\.IEnumerable&lt;](https://learn.microsoft.com/en-us/dotnet/api/system.collections.generic.ienumerable-1 'System\.Collections\.Generic\.IEnumerable\`1')[Building](DiGi.CityGML.Classes.md#DiGi.CityGML.Classes.Building 'DiGi\.CityGML\.Classes\.Building')[&gt;](https://learn.microsoft.com/en-us/dotnet/api/system.collections.generic.ienumerable-1 'System\.Collections\.Generic\.IEnumerable\`1')
+### Methods
+
+<a name='DiGi.CityGML.Classes.CityModel.Adopt(System.Collections.Generic.IEnumerable_DiGi.CityGML.Classes.Building_)'></a>
+
+## CityModel\.Adopt\(IEnumerable\<Building\>\) Method
+
+Stores the given buildings without cloning them, taking ownership of the instances as given\.
+
+```csharp
+private void Adopt(System.Collections.Generic.IEnumerable<DiGi.CityGML.Classes.Building>? buildings);
+```
+#### Parameters
+
+<a name='DiGi.CityGML.Classes.CityModel.Adopt(System.Collections.Generic.IEnumerable_DiGi.CityGML.Classes.Building_).buildings'></a>
+
+`buildings` [System\.Collections\.Generic\.IEnumerable&lt;](https://learn.microsoft.com/en-us/dotnet/api/system.collections.generic.ienumerable-1 'System\.Collections\.Generic\.IEnumerable\`1')[Building](DiGi.CityGML.Classes.md#DiGi.CityGML.Classes.Building 'DiGi\.CityGML\.Classes\.Building')[&gt;](https://learn.microsoft.com/en-us/dotnet/api/system.collections.generic.ienumerable-1 'System\.Collections\.Generic\.IEnumerable\`1')
+
+The buildings to adopt\.
 
 <a name='DiGi.CityGML.Classes.GroundSurface'></a>
 
@@ -250,6 +348,37 @@ The unique identifier for the ground surface\.
 `geometry` [DiGi\.Geometry\.Spatial\.Interfaces\.IPolygonalFace3D](https://learn.microsoft.com/en-us/dotnet/api/digi.geometry.spatial.interfaces.ipolygonalface3d 'DiGi\.Geometry\.Spatial\.Interfaces\.IPolygonalFace3D')
 
 The 3D polygonal face geometry associated with the ground surface\.
+
+<a name='DiGi.CityGML.Classes.GroundSurface.GroundSurface(string,DiGi.Geometry.Spatial.Interfaces.IPolygonalFace3D,bool)'></a>
+
+## GroundSurface\(string, IPolygonalFace3D, bool\) Constructor
+
+Initializes a new instance of the [GroundSurface](DiGi.CityGML.Classes.md#DiGi.CityGML.Classes.GroundSurface 'DiGi\.CityGML\.Classes\.GroundSurface') class with a specified unique identifier and geometry, optionally adopting the geometry instead of cloning it\.
+
+Internal because adopting is only safe for freshly built, unshared geometry - the parse path in [Convert](DiGi.CityGML.md#DiGi.CityGML.Convert 'DiGi\.CityGML\.Convert'). Every public entry point clones.
+
+```csharp
+internal GroundSurface(string? uniqueId, DiGi.Geometry.Spatial.Interfaces.IPolygonalFace3D? geometry, bool clone);
+```
+#### Parameters
+
+<a name='DiGi.CityGML.Classes.GroundSurface.GroundSurface(string,DiGi.Geometry.Spatial.Interfaces.IPolygonalFace3D,bool).uniqueId'></a>
+
+`uniqueId` [System\.String](https://learn.microsoft.com/en-us/dotnet/api/system.string 'System\.String')
+
+The unique identifier for the ground surface\.
+
+<a name='DiGi.CityGML.Classes.GroundSurface.GroundSurface(string,DiGi.Geometry.Spatial.Interfaces.IPolygonalFace3D,bool).geometry'></a>
+
+`geometry` [DiGi\.Geometry\.Spatial\.Interfaces\.IPolygonalFace3D](https://learn.microsoft.com/en-us/dotnet/api/digi.geometry.spatial.interfaces.ipolygonalface3d 'DiGi\.Geometry\.Spatial\.Interfaces\.IPolygonalFace3D')
+
+The 3D polygonal face geometry associated with the ground surface\.
+
+<a name='DiGi.CityGML.Classes.GroundSurface.GroundSurface(string,DiGi.Geometry.Spatial.Interfaces.IPolygonalFace3D,bool).clone'></a>
+
+`clone` [System\.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean 'System\.Boolean')
+
+True to store a defensive copy of [geometry](DiGi.CityGML.Classes.md#DiGi.CityGML.Classes.GroundSurface.GroundSurface(string,DiGi.Geometry.Spatial.Interfaces.IPolygonalFace3D,bool).geometry 'DiGi\.CityGML\.Classes\.GroundSurface\.GroundSurface\(string, DiGi\.Geometry\.Spatial\.Interfaces\.IPolygonalFace3D, bool\)\.geometry'); false to take ownership of the instance as given\.
 
 <a name='DiGi.CityGML.Classes.GroundSurface.GroundSurface(System.Text.Json.Nodes.JsonObject)'></a>
 
@@ -320,6 +449,37 @@ The unique identifier for the roof surface\.
 `geometry` [DiGi\.Geometry\.Spatial\.Interfaces\.IPolygonalFace3D](https://learn.microsoft.com/en-us/dotnet/api/digi.geometry.spatial.interfaces.ipolygonalface3d 'DiGi\.Geometry\.Spatial\.Interfaces\.IPolygonalFace3D')
 
 The 3D polygonal face geometry associated with the roof surface\.
+
+<a name='DiGi.CityGML.Classes.RoofSurface.RoofSurface(string,DiGi.Geometry.Spatial.Interfaces.IPolygonalFace3D,bool)'></a>
+
+## RoofSurface\(string, IPolygonalFace3D, bool\) Constructor
+
+Initializes a new instance of the [RoofSurface](DiGi.CityGML.Classes.md#DiGi.CityGML.Classes.RoofSurface 'DiGi\.CityGML\.Classes\.RoofSurface') class with a specified unique identifier and geometry, optionally adopting the geometry instead of cloning it\.
+
+Internal because adopting is only safe for freshly built, unshared geometry - the parse path in [Convert](DiGi.CityGML.md#DiGi.CityGML.Convert 'DiGi\.CityGML\.Convert'). Every public entry point clones.
+
+```csharp
+internal RoofSurface(string? uniqueId, DiGi.Geometry.Spatial.Interfaces.IPolygonalFace3D? geometry, bool clone);
+```
+#### Parameters
+
+<a name='DiGi.CityGML.Classes.RoofSurface.RoofSurface(string,DiGi.Geometry.Spatial.Interfaces.IPolygonalFace3D,bool).uniqueId'></a>
+
+`uniqueId` [System\.String](https://learn.microsoft.com/en-us/dotnet/api/system.string 'System\.String')
+
+The unique identifier for the roof surface\.
+
+<a name='DiGi.CityGML.Classes.RoofSurface.RoofSurface(string,DiGi.Geometry.Spatial.Interfaces.IPolygonalFace3D,bool).geometry'></a>
+
+`geometry` [DiGi\.Geometry\.Spatial\.Interfaces\.IPolygonalFace3D](https://learn.microsoft.com/en-us/dotnet/api/digi.geometry.spatial.interfaces.ipolygonalface3d 'DiGi\.Geometry\.Spatial\.Interfaces\.IPolygonalFace3D')
+
+The 3D polygonal face geometry associated with the roof surface\.
+
+<a name='DiGi.CityGML.Classes.RoofSurface.RoofSurface(string,DiGi.Geometry.Spatial.Interfaces.IPolygonalFace3D,bool).clone'></a>
+
+`clone` [System\.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean 'System\.Boolean')
+
+True to store a defensive copy of [geometry](DiGi.CityGML.Classes.md#DiGi.CityGML.Classes.RoofSurface.RoofSurface(string,DiGi.Geometry.Spatial.Interfaces.IPolygonalFace3D,bool).geometry 'DiGi\.CityGML\.Classes\.RoofSurface\.RoofSurface\(string, DiGi\.Geometry\.Spatial\.Interfaces\.IPolygonalFace3D, bool\)\.geometry'); false to take ownership of the instance as given\.
 
 <a name='DiGi.CityGML.Classes.RoofSurface.RoofSurface(System.Text.Json.Nodes.JsonObject)'></a>
 
@@ -398,6 +558,37 @@ The unique identifier for the surface\.
 `geometry` [DiGi\.Geometry\.Spatial\.Interfaces\.IPolygonalFace3D](https://learn.microsoft.com/en-us/dotnet/api/digi.geometry.spatial.interfaces.ipolygonalface3d 'DiGi\.Geometry\.Spatial\.Interfaces\.IPolygonalFace3D')
 
 The polygonal face representing the 3D geometry of the surface\.
+
+<a name='DiGi.CityGML.Classes.Surface.Surface(string,DiGi.Geometry.Spatial.Interfaces.IPolygonalFace3D,bool)'></a>
+
+## Surface\(string, IPolygonalFace3D, bool\) Constructor
+
+Initializes a new instance of the [Surface](DiGi.CityGML.Classes.md#DiGi.CityGML.Classes.Surface 'DiGi\.CityGML\.Classes\.Surface') class with a specified unique identifier and geometry, optionally adopting the geometry instead of cloning it\.
+
+Internal because adopting is only safe for freshly built, unshared geometry - the parse path in [Convert](DiGi.CityGML.md#DiGi.CityGML.Convert 'DiGi\.CityGML\.Convert'). Every public entry point clones.
+
+```csharp
+internal Surface(string? uniqueId, DiGi.Geometry.Spatial.Interfaces.IPolygonalFace3D? geometry, bool clone);
+```
+#### Parameters
+
+<a name='DiGi.CityGML.Classes.Surface.Surface(string,DiGi.Geometry.Spatial.Interfaces.IPolygonalFace3D,bool).uniqueId'></a>
+
+`uniqueId` [System\.String](https://learn.microsoft.com/en-us/dotnet/api/system.string 'System\.String')
+
+The unique identifier for the surface\.
+
+<a name='DiGi.CityGML.Classes.Surface.Surface(string,DiGi.Geometry.Spatial.Interfaces.IPolygonalFace3D,bool).geometry'></a>
+
+`geometry` [DiGi\.Geometry\.Spatial\.Interfaces\.IPolygonalFace3D](https://learn.microsoft.com/en-us/dotnet/api/digi.geometry.spatial.interfaces.ipolygonalface3d 'DiGi\.Geometry\.Spatial\.Interfaces\.IPolygonalFace3D')
+
+The polygonal face representing the 3D geometry of the surface\.
+
+<a name='DiGi.CityGML.Classes.Surface.Surface(string,DiGi.Geometry.Spatial.Interfaces.IPolygonalFace3D,bool).clone'></a>
+
+`clone` [System\.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean 'System\.Boolean')
+
+True to store a defensive copy of [geometry](DiGi.CityGML.Classes.md#DiGi.CityGML.Classes.Surface.Surface(string,DiGi.Geometry.Spatial.Interfaces.IPolygonalFace3D,bool).geometry 'DiGi\.CityGML\.Classes\.Surface\.Surface\(string, DiGi\.Geometry\.Spatial\.Interfaces\.IPolygonalFace3D, bool\)\.geometry'); false to take ownership of the instance as given\.
 
 <a name='DiGi.CityGML.Classes.Surface.Surface(System.Text.Json.Nodes.JsonObject)'></a>
 
@@ -486,6 +677,37 @@ The unique identifier for the surface\.
 
 The polygonal face 3D geometry associated with the surface\.
 
+<a name='DiGi.CityGML.Classes.UndefinedSurface.UndefinedSurface(string,DiGi.Geometry.Spatial.Interfaces.IPolygonalFace3D,bool)'></a>
+
+## UndefinedSurface\(string, IPolygonalFace3D, bool\) Constructor
+
+Initializes a new instance of the [UndefinedSurface](DiGi.CityGML.Classes.md#DiGi.CityGML.Classes.UndefinedSurface 'DiGi\.CityGML\.Classes\.UndefinedSurface') class with a specified unique identifier and geometry, optionally adopting the geometry instead of cloning it\.
+
+Internal because adopting is only safe for freshly built, unshared geometry - the parse path in [Convert](DiGi.CityGML.md#DiGi.CityGML.Convert 'DiGi\.CityGML\.Convert'). Every public entry point clones.
+
+```csharp
+internal UndefinedSurface(string? uniqueId, DiGi.Geometry.Spatial.Interfaces.IPolygonalFace3D? geometry, bool clone);
+```
+#### Parameters
+
+<a name='DiGi.CityGML.Classes.UndefinedSurface.UndefinedSurface(string,DiGi.Geometry.Spatial.Interfaces.IPolygonalFace3D,bool).uniqueId'></a>
+
+`uniqueId` [System\.String](https://learn.microsoft.com/en-us/dotnet/api/system.string 'System\.String')
+
+The unique identifier for the undefined surface\.
+
+<a name='DiGi.CityGML.Classes.UndefinedSurface.UndefinedSurface(string,DiGi.Geometry.Spatial.Interfaces.IPolygonalFace3D,bool).geometry'></a>
+
+`geometry` [DiGi\.Geometry\.Spatial\.Interfaces\.IPolygonalFace3D](https://learn.microsoft.com/en-us/dotnet/api/digi.geometry.spatial.interfaces.ipolygonalface3d 'DiGi\.Geometry\.Spatial\.Interfaces\.IPolygonalFace3D')
+
+The 3D polygonal face geometry associated with the undefined surface\.
+
+<a name='DiGi.CityGML.Classes.UndefinedSurface.UndefinedSurface(string,DiGi.Geometry.Spatial.Interfaces.IPolygonalFace3D,bool).clone'></a>
+
+`clone` [System\.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean 'System\.Boolean')
+
+True to store a defensive copy of [geometry](DiGi.CityGML.Classes.md#DiGi.CityGML.Classes.UndefinedSurface.UndefinedSurface(string,DiGi.Geometry.Spatial.Interfaces.IPolygonalFace3D,bool).geometry 'DiGi\.CityGML\.Classes\.UndefinedSurface\.UndefinedSurface\(string, DiGi\.Geometry\.Spatial\.Interfaces\.IPolygonalFace3D, bool\)\.geometry'); false to take ownership of the instance as given\.
+
 <a name='DiGi.CityGML.Classes.UndefinedSurface.UndefinedSurface(System.Text.Json.Nodes.JsonObject)'></a>
 
 ## UndefinedSurface\(JsonObject\) Constructor
@@ -555,6 +777,37 @@ The unique identifier for the wall surface\.
 `geometry` [DiGi\.Geometry\.Spatial\.Interfaces\.IPolygonalFace3D](https://learn.microsoft.com/en-us/dotnet/api/digi.geometry.spatial.interfaces.ipolygonalface3d 'DiGi\.Geometry\.Spatial\.Interfaces\.IPolygonalFace3D')
 
 The polygonal 3D face representing the geometry of the wall surface\.
+
+<a name='DiGi.CityGML.Classes.WallSurface.WallSurface(string,DiGi.Geometry.Spatial.Interfaces.IPolygonalFace3D,bool)'></a>
+
+## WallSurface\(string, IPolygonalFace3D, bool\) Constructor
+
+Initializes a new instance of the [WallSurface](DiGi.CityGML.Classes.md#DiGi.CityGML.Classes.WallSurface 'DiGi\.CityGML\.Classes\.WallSurface') class with a specified unique identifier and geometry, optionally adopting the geometry instead of cloning it\.
+
+Internal because adopting is only safe for freshly built, unshared geometry - the parse path in [Convert](DiGi.CityGML.md#DiGi.CityGML.Convert 'DiGi\.CityGML\.Convert'). Every public entry point clones.
+
+```csharp
+internal WallSurface(string? uniqueId, DiGi.Geometry.Spatial.Interfaces.IPolygonalFace3D? geometry, bool clone);
+```
+#### Parameters
+
+<a name='DiGi.CityGML.Classes.WallSurface.WallSurface(string,DiGi.Geometry.Spatial.Interfaces.IPolygonalFace3D,bool).uniqueId'></a>
+
+`uniqueId` [System\.String](https://learn.microsoft.com/en-us/dotnet/api/system.string 'System\.String')
+
+The unique identifier for the wall surface\.
+
+<a name='DiGi.CityGML.Classes.WallSurface.WallSurface(string,DiGi.Geometry.Spatial.Interfaces.IPolygonalFace3D,bool).geometry'></a>
+
+`geometry` [DiGi\.Geometry\.Spatial\.Interfaces\.IPolygonalFace3D](https://learn.microsoft.com/en-us/dotnet/api/digi.geometry.spatial.interfaces.ipolygonalface3d 'DiGi\.Geometry\.Spatial\.Interfaces\.IPolygonalFace3D')
+
+The 3D polygonal face geometry associated with the wall surface\.
+
+<a name='DiGi.CityGML.Classes.WallSurface.WallSurface(string,DiGi.Geometry.Spatial.Interfaces.IPolygonalFace3D,bool).clone'></a>
+
+`clone` [System\.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean 'System\.Boolean')
+
+True to store a defensive copy of [geometry](DiGi.CityGML.Classes.md#DiGi.CityGML.Classes.WallSurface.WallSurface(string,DiGi.Geometry.Spatial.Interfaces.IPolygonalFace3D,bool).geometry 'DiGi\.CityGML\.Classes\.WallSurface\.WallSurface\(string, DiGi\.Geometry\.Spatial\.Interfaces\.IPolygonalFace3D, bool\)\.geometry'); false to take ownership of the instance as given\.
 
 <a name='DiGi.CityGML.Classes.WallSurface.WallSurface(System.Text.Json.Nodes.JsonObject)'></a>
 

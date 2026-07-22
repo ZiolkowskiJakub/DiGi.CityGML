@@ -19,9 +19,21 @@ namespace DiGi.CityGML.Classes
         /// <param name="uniqueId">The unique identifier for the surface.</param>
         /// <param name="geometry">The polygonal face representing the 3D geometry of the surface.</param>
         public Surface(string? uniqueId, IPolygonalFace3D? geometry)
+            : this(uniqueId, geometry, true)
+        {
+        }
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="Surface"/> class with a specified unique identifier and geometry, optionally adopting the geometry instead of cloning it.
+        /// <para>Internal because adopting is only safe for freshly built, unshared geometry - the parse path in <see cref="Convert"/>. Every public entry point clones.</para>
+        /// </summary>
+        /// <param name="uniqueId">The unique identifier for the surface.</param>
+        /// <param name="geometry">The polygonal face representing the 3D geometry of the surface.</param>
+        /// <param name="clone">True to store a defensive copy of <paramref name="geometry"/>; false to take ownership of the instance as given.</param>
+        internal Surface(string? uniqueId, IPolygonalFace3D? geometry, bool clone)
             : base(uniqueId)
         {
-            this.geometry = Core.Query.Clone(geometry);
+            this.geometry = clone ? Core.Query.Clone(geometry) : geometry;
         }
 
         /// <summary>

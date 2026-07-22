@@ -1,4 +1,4 @@
-using DiGi.CityGML.Classes;
+﻿using DiGi.CityGML.Classes;
 using DiGi.CityGML.Interfaces;
 using DiGi.Geometry.Spatial.Interfaces;
 using System.Xml;
@@ -31,12 +31,14 @@ namespace DiGi.CityGML
                 uniqueId = Query.UniqueId(xmlNode.ChildNodes[0]);
             }
 
+            // polygonalFace3D was just built from the XML and is referenced by nothing else, so the
+            // surface adopts it rather than paying for a defensive deep copy of all its point data.
             return xmlNode.LocalName switch
             {
-                Constants.XmlNode.Name.RoofSurface => new RoofSurface(uniqueId, polygonalFace3D),
-                Constants.XmlNode.Name.WallSurface => new WallSurface(uniqueId, polygonalFace3D),
-                Constants.XmlNode.Name.GroundSurface => new GroundSurface(uniqueId, polygonalFace3D),
-                _ => new UndefinedSurface(uniqueId, polygonalFace3D),
+                Constants.XmlNode.Name.RoofSurface => new RoofSurface(uniqueId, polygonalFace3D, false),
+                Constants.XmlNode.Name.WallSurface => new WallSurface(uniqueId, polygonalFace3D, false),
+                Constants.XmlNode.Name.GroundSurface => new GroundSurface(uniqueId, polygonalFace3D, false),
+                _ => new UndefinedSurface(uniqueId, polygonalFace3D, false),
             };
         }
     }

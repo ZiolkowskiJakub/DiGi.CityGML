@@ -456,30 +456,36 @@ The [System\.Action&lt;&gt;](https://learn.microsoft.com/en-us/dotnet/api/system
 [System\.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean 'System\.Boolean')  
 True if the walk completed successfully; otherwise, false\.
 
-<a name='DiGi.CityGML.Query.RunAsync(string,System.Func_string,DiGi.CityGML.Classes.CityModel,System.Threading.Tasks.Task_)'></a>
+<a name='DiGi.CityGML.Query.RunAsync(string,System.Func_string,DiGi.CityGML.Classes.CityModel,System.Threading.Tasks.Task_bool__,System.Threading.CancellationToken)'></a>
 
-## Query\.RunAsync\(string, Func\<string,CityModel,Task\>\) Method
+## Query\.RunAsync\(string, Func\<string,CityModel,Task\<bool\>\>, CancellationToken\) Method
 
-Asynchronously walks the specified path or directory, parsing CityGML files and invoking the given [action](DiGi.CityGML.md#DiGi.CityGML.Query.RunAsync(string,System.Func_string,DiGi.CityGML.Classes.CityModel,System.Threading.Tasks.Task_).action 'DiGi\.CityGML\.Query\.RunAsync\(string, System\.Func\<string,DiGi\.CityGML\.Classes\.CityModel,System\.Threading\.Tasks\.Task\>\)\.action') for each [CityModel](DiGi.CityGML.Classes.md#DiGi.CityGML.Classes.CityModel 'DiGi\.CityGML\.Classes\.CityModel') found\.
+Asynchronously walks the specified path or directory, parsing CityGML files and invoking the given [action](DiGi.CityGML.md#DiGi.CityGML.Query.RunAsync(string,System.Func_string,DiGi.CityGML.Classes.CityModel,System.Threading.Tasks.Task_bool__,System.Threading.CancellationToken).action 'DiGi\.CityGML\.Query\.RunAsync\(string, System\.Func\<string,DiGi\.CityGML\.Classes\.CityModel,System\.Threading\.Tasks\.Task\<bool\>\>, System\.Threading\.CancellationToken\)\.action') for each [CityModel](DiGi.CityGML.Classes.md#DiGi.CityGML.Classes.CityModel 'DiGi\.CityGML\.Classes\.CityModel') found\.
 
 If the path points to a single non-zip file, the [LOD](DiGi.CityGML.Enums.md#DiGi.CityGML.Enums.LOD 'DiGi\.CityGML\.Enums\.LOD') and year are derived from its parent directory structure and a single [CityModel](DiGi.CityGML.Classes.md#DiGi.CityGML.Classes.CityModel 'DiGi\.CityGML\.Classes\.CityModel') is created. If the path is a .zip file or a directory, all .zip archives are enumerated recursively; each [System\.IO\.Compression\.DeflateStream](https://learn.microsoft.com/en-us/dotnet/api/system.io.compression.deflatestream 'System\.IO\.Compression\.DeflateStream') entry within an archive is parsed individually.
 
 ```csharp
-public static System.Threading.Tasks.Task<bool> RunAsync(string? pathOrDirectory, System.Func<string,DiGi.CityGML.Classes.CityModel?,System.Threading.Tasks.Task>? action);
+public static System.Threading.Tasks.Task<bool> RunAsync(string? pathOrDirectory, System.Func<string,DiGi.CityGML.Classes.CityModel?,System.Threading.Tasks.Task<bool>>? action, System.Threading.CancellationToken cancellationToken=default(System.Threading.CancellationToken));
 ```
 #### Parameters
 
-<a name='DiGi.CityGML.Query.RunAsync(string,System.Func_string,DiGi.CityGML.Classes.CityModel,System.Threading.Tasks.Task_).pathOrDirectory'></a>
+<a name='DiGi.CityGML.Query.RunAsync(string,System.Func_string,DiGi.CityGML.Classes.CityModel,System.Threading.Tasks.Task_bool__,System.Threading.CancellationToken).pathOrDirectory'></a>
 
 `pathOrDirectory` [System\.String](https://learn.microsoft.com/en-us/dotnet/api/system.string 'System\.String')
 
 A path to a single CityGML file, a \.zip archive, or a directory containing \.zip archives\. This value can be null\.
 
-<a name='DiGi.CityGML.Query.RunAsync(string,System.Func_string,DiGi.CityGML.Classes.CityModel,System.Threading.Tasks.Task_).action'></a>
+<a name='DiGi.CityGML.Query.RunAsync(string,System.Func_string,DiGi.CityGML.Classes.CityModel,System.Threading.Tasks.Task_bool__,System.Threading.CancellationToken).action'></a>
 
-`action` [System\.Func&lt;](https://learn.microsoft.com/en-us/dotnet/api/system.func-3 'System\.Func\`3')[System\.String](https://learn.microsoft.com/en-us/dotnet/api/system.string 'System\.String')[,](https://learn.microsoft.com/en-us/dotnet/api/system.func-3 'System\.Func\`3')[CityModel](DiGi.CityGML.Classes.md#DiGi.CityGML.Classes.CityModel 'DiGi\.CityGML\.Classes\.CityModel')[,](https://learn.microsoft.com/en-us/dotnet/api/system.func-3 'System\.Func\`3')[System\.Threading\.Tasks\.Task](https://learn.microsoft.com/en-us/dotnet/api/system.threading.tasks.task 'System\.Threading\.Tasks\.Task')[&gt;](https://learn.microsoft.com/en-us/dotnet/api/system.func-3 'System\.Func\`3')
+`action` [System\.Func&lt;](https://learn.microsoft.com/en-us/dotnet/api/system.func-3 'System\.Func\`3')[System\.String](https://learn.microsoft.com/en-us/dotnet/api/system.string 'System\.String')[,](https://learn.microsoft.com/en-us/dotnet/api/system.func-3 'System\.Func\`3')[CityModel](DiGi.CityGML.Classes.md#DiGi.CityGML.Classes.CityModel 'DiGi\.CityGML\.Classes\.CityModel')[,](https://learn.microsoft.com/en-us/dotnet/api/system.func-3 'System\.Func\`3')[System\.Threading\.Tasks\.Task&lt;](https://learn.microsoft.com/en-us/dotnet/api/system.threading.tasks.task-1 'System\.Threading\.Tasks\.Task\`1')[System\.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean 'System\.Boolean')[&gt;](https://learn.microsoft.com/en-us/dotnet/api/system.threading.tasks.task-1 'System\.Threading\.Tasks\.Task\`1')[&gt;](https://learn.microsoft.com/en-us/dotnet/api/system.func-3 'System\.Func\`3')
 
-The asynchronous [System\.Func&lt;&gt;](https://learn.microsoft.com/en-us/dotnet/api/system.func-3 'System\.Func\`3') invoked for each city model with the source path and the parsed [CityModel](DiGi.CityGML.Classes.md#DiGi.CityGML.Classes.CityModel 'DiGi\.CityGML\.Classes\.CityModel'), which can be null\. This value can be null\.
+The asynchronous [System\.Func&lt;&gt;](https://learn.microsoft.com/en-us/dotnet/api/system.func-3 'System\.Func\`3') invoked for each city model with the source path and the parsed [CityModel](DiGi.CityGML.Classes.md#DiGi.CityGML.Classes.CityModel 'DiGi\.CityGML\.Classes\.CityModel'), which can be null\. Returning false stops the walk before the next file is parsed\. This value can be null\.
+
+<a name='DiGi.CityGML.Query.RunAsync(string,System.Func_string,DiGi.CityGML.Classes.CityModel,System.Threading.Tasks.Task_bool__,System.Threading.CancellationToken).cancellationToken'></a>
+
+`cancellationToken` [System\.Threading\.CancellationToken](https://learn.microsoft.com/en-us/dotnet/api/system.threading.cancellationtoken 'System\.Threading\.CancellationToken')
+
+A token observed before each file is parsed, so cancelling stops the walk within one file rather than after the whole tree has been read\.
 
 #### Returns
 [System\.Threading\.Tasks\.Task&lt;](https://learn.microsoft.com/en-us/dotnet/api/system.threading.tasks.task-1 'System\.Threading\.Tasks\.Task\`1')[System\.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean 'System\.Boolean')[&gt;](https://learn.microsoft.com/en-us/dotnet/api/system.threading.tasks.task-1 'System\.Threading\.Tasks\.Task\`1')  

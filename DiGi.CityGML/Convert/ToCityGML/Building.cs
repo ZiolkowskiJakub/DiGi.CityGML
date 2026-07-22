@@ -1,4 +1,4 @@
-using DiGi.CityGML.Classes;
+﻿using DiGi.CityGML.Classes;
 using DiGi.CityGML.Interfaces;
 using System.Collections.Generic;
 using System.Xml;
@@ -132,7 +132,9 @@ namespace DiGi.CityGML
                 }
             }
 
-            Building result = new(uniqueId, roofTypeId, surfaces);
+            // The surfaces were just built by ToCityGML_Surface and are referenced by nothing else, so
+            // the building adopts them rather than deep-copying every surface geometry a second time.
+            Building result = new(uniqueId, roofTypeId, surfaces, false);
             result.SetParameters(xmlNode);
 
             return result;

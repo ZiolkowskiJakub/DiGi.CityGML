@@ -99,14 +99,17 @@ namespace DiGi.CityGML
                 return null;
             }
 
-            string text = File.ReadAllText(path);
-            if (string.IsNullOrWhiteSpace(text))
+            // Load from the stream rather than File.ReadAllText + LoadXml: the latter materializes the
+            // whole file as a UTF-16 string before the parser sees a single byte.
+            using FileStream fileStream = File.OpenRead(path);
+
+            if (fileStream.Length == 0)
             {
                 return null;
             }
 
             XmlDocument xmlDocument = new();
-            xmlDocument.LoadXml(text);
+            xmlDocument.Load(fileStream);
 
             return CityModel(xmlDocument, lOD, year);
         }

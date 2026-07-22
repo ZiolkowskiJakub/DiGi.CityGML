@@ -22,7 +22,9 @@ namespace DiGi.CityGML
             return RunAsync(pathOrDirectory, (path, cityModel) =>
             {
                 action.Invoke(path, cityModel);
-                return Task.CompletedTask;
+
+                // The synchronous walk has no way to signal a stop, so it always continues.
+                return Task.FromResult(true);
             }).GetAwaiter().GetResult();
         }
     }

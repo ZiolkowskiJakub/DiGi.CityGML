@@ -24,9 +24,30 @@ namespace DiGi.CityGML.Classes
         /// <param name="roofTypeId">The identifier representing the type of the roof.</param>
         /// <param name="surfaces">A collection of surfaces associated with the building.</param>
         public Building(string? uniqueId, int roofTypeId, IEnumerable<ISurface>? surfaces)
+            : this(uniqueId, roofTypeId, surfaces, true)
+        {
+        }
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="Building"/> class with specified unique identifier, roof type ID, and surfaces, optionally adopting the surfaces instead of cloning them.
+        /// <para>Internal because adopting is only safe for freshly built, unshared surfaces - the parse path in <see cref="Convert"/>. Every public entry point clones.</para>
+        /// </summary>
+        /// <param name="uniqueId">The unique identifier for the building.</param>
+        /// <param name="roofTypeId">The identifier representing the type of the roof.</param>
+        /// <param name="surfaces">A collection of surfaces associated with the building.</param>
+        /// <param name="clone">True to store defensive copies of <paramref name="surfaces"/>; false to take ownership of the instances as given.</param>
+        internal Building(string? uniqueId, int roofTypeId, IEnumerable<ISurface>? surfaces, bool clone)
             : base(uniqueId)
         {
-            Surfaces = surfaces;
+            if (clone)
+            {
+                Surfaces = surfaces;
+            }
+            else
+            {
+                Adopt(surfaces);
+            }
+
             this.roofTypeId = roofTypeId;
         }
 
@@ -93,6 +114,29 @@ namespace DiGi.CityGML.Classes
                     {
                         surfaces[surface_Temp!.UniqueId!] = surface_Temp;
                     }
+                }
+            }
+        }
+
+        /// <summary>
+        /// Stores the given surfaces without cloning them, taking ownership of the instances as given.
+        /// </summary>
+        /// <param name="surfaces">The surfaces to adopt.</param>
+        private void Adopt(IEnumerable<ISurface>? surfaces)
+        {
+            this.surfaces = null;
+
+            if (surfaces == null)
+            {
+                return;
+            }
+
+            this.surfaces = [];
+            foreach (ISurface surface in surfaces)
+            {
+                if (!string.IsNullOrEmpty(surface?.UniqueId))
+                {
+                    this.surfaces[surface!.UniqueId!] = surface;
                 }
             }
         }

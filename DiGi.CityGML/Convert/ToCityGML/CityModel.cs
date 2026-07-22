@@ -1,4 +1,4 @@
-using DiGi.CityGML.Classes;
+﻿using DiGi.CityGML.Classes;
 using System.Collections.Generic;
 using System.Xml;
 
@@ -40,7 +40,9 @@ namespace DiGi.CityGML
                 }
             }
 
-            CityModel result = new(buildings);
+            // The buildings were just built by ToCityGML_Building and are referenced by nothing else, so
+            // the city model adopts them rather than deep-copying every surface geometry a third time.
+            CityModel result = new(buildings, false);
 
             return result;
         }
