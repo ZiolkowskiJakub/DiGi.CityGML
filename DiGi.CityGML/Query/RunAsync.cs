@@ -51,6 +51,9 @@ namespace DiGi.CityGML
                     CityModel? cityModel = Create.CityModel(pathOrDirectory, lOD, year);
 
                     await action.Invoke(pathOrDirectory!, cityModel);
+
+                    // The single file has been processed - the paths_Zip guard below only covers the zip/directory branches.
+                    return true;
                 }
             }
             else if (Directory.Exists(pathOrDirectory))
@@ -93,12 +96,15 @@ namespace DiGi.CityGML
 
                 foreach (ZipArchiveEntry zipArchiveEntry in zipArchive.Entries)
                 {
-                    if (zipArchiveEntry.Open() is not DeflateStream)
+                    // Filter by extension, not stream type: directory entries and stored (uncompressed) entries both open as SubReadStream rather than DeflateStream, so a compression check would drop stored .gml files.
+                    if (!zipArchiveEntry.Name.EndsWith(".gml", StringComparison.OrdinalIgnoreCase))
                     {
                         continue;
                     }
 
-                    CityModel? cityModel = Create.CityModel(zipArchiveEntry.Open(), lOD, year);
+                    using Stream stream = zipArchiveEntry.Open();
+
+                    CityModel? cityModel = Create.CityModel(stream, lOD, year);
 
                     string path = Path.Combine(path_Zip, zipArchiveEntry.FullName.Replace('/', Path.DirectorySeparatorChar));
 
