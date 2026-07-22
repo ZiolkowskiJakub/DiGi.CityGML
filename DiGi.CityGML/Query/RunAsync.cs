@@ -16,9 +16,10 @@ namespace DiGi.CityGML
         /// </summary>
         /// <param name="pathOrDirectory">A path to a single CityGML file, a .zip archive, or a directory containing .zip archives. This value can be null.</param>
         /// <param name="action">The asynchronous <see cref="Func{T1, T2, TResult}"/> invoked for each city model with the source path and the parsed <see cref="CityModel"/>, which can be null. Returning false stops the walk before the next file is parsed. This value can be null.</param>
+        /// <param name="filter">An optional predicate applied to each source path <b>before</b> it is parsed; returning false skips the file without reading it. Null admits every file.</param>
         /// <param name="cancellationToken">A token observed before each file is parsed, so cancelling stops the walk within one file rather than after the whole tree has been read.</param>
         /// <returns>A task that represents the asynchronous operation. The task result is true if the walk completed successfully; otherwise, false.</returns>
-        public static async Task<bool> RunAsync(string? pathOrDirectory, Func<string, CityModel?, Task<bool>>? action, CancellationToken cancellationToken = default)
+        public static async Task<bool> RunAsync(string? pathOrDirectory, Func<string, CityModel?, Task<bool>>? action, Func<string, bool>? filter = null, CancellationToken cancellationToken = default)
         {
             if (string.IsNullOrWhiteSpace(pathOrDirectory) || action is null)
             {
@@ -52,6 +53,11 @@ namespace DiGi.CityGML
 
                     cancellationToken.ThrowIfCancellationRequested();
 
+                    if (filter is not null && !filter.Invoke(pathOrDirectory!))
+                    {
+                        return true;
+                    }
+
                     CityModel? cityModel = Create.CityModel(pathOrDirectory, lOD, year);
 
                     // The single file has been processed - the paths_Zip guard below only covers the zip/directory branches.
@@ -61,6 +67,10 @@ namespace DiGi.CityGML
             else if (Directory.Exists(pathOrDirectory))
             {
                 paths_Zip = Directory.GetFiles(pathOrDirectory, "*.zip", SearchOption.AllDirectories);
+
+                // Directory.GetFiles makes no ordering guarantee. Sorting keeps the walk reproducible,
+                // which is what lets a caller resume from a previously recorded position.
+                Array.Sort(paths_Zip, StringComparer.OrdinalIgnoreCase);
             }
 
             if (paths_Zip == null || paths_Zip.Length == 0)
@@ -108,11 +118,18 @@ namespace DiGi.CityGML
                     // or already-failed run must not pay for the rest of the tree.
                     cancellationToken.ThrowIfCancellationRequested();
 
+                    // The path is built before the parse so filter can reject an entry without the
+                    // cost of reading and converting it - skipping afterwards would save nothing.
+                    string path = Path.Combine(path_Zip, zipArchiveEntry.FullName.Replace('/', Path.DirectorySeparatorChar));
+
+                    if (filter is not null && !filter.Invoke(path))
+                    {
+                        continue;
+                    }
+
                     using Stream stream = zipArchiveEntry.Open();
 
                     CityModel? cityModel = Create.CityModel(stream, lOD, year);
-
-                    string path = Path.Combine(path_Zip, zipArchiveEntry.FullName.Replace('/', Path.DirectorySeparatorChar));
 
                     if (!await action.Invoke(path, cityModel))
                     {
