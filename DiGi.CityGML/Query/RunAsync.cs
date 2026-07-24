@@ -12,7 +12,7 @@ namespace DiGi.CityGML
     {
         /// <summary>
         /// Asynchronously walks the specified path or directory, parsing CityGML files and invoking the given <paramref name="action"/> for each <see cref="CityModel"/> found.
-        /// <para>If the path points to a single non-zip file, the <see cref="Enums.LOD"/> and year are derived from its parent directory structure and a single <see cref="CityModel"/> is created. If the path is a .zip file or a directory, all .zip archives are enumerated recursively; each <see cref="DeflateStream"/> entry within an archive is parsed individually.</para>
+        /// <para>If the path points to a single non-zip file, the <see cref="LOD"/> and year are derived from its parent directory structure and a single <see cref="CityModel"/> is created. If the path is a .zip file or a directory, all .zip archives are enumerated recursively; each <see cref="DeflateStream"/> entry within an archive is parsed individually.</para>
         /// </summary>
         /// <param name="pathOrDirectory">A path to a single CityGML file, a .zip archive, or a directory containing .zip archives. This value can be null.</param>
         /// <param name="action">The asynchronous <see cref="Func{T1, T2, TResult}"/> invoked for each city model with the source path and the parsed <see cref="CityModel"/>, which can be null. Returning false stops the walk before the next file is parsed. This value can be null.</param>
