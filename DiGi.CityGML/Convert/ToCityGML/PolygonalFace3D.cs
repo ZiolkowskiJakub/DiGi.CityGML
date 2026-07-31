@@ -61,7 +61,10 @@ namespace DiGi.CityGML
                 }
                 else if (xmlNode_Temp.LocalName == Constants.XmlNode.Name.Interior)
                 {
-                    internalEdge3Ds = [];
+                    // Every hole of a polygon is written as its own interior element, so the rings are
+                    // collected across all of them. Creating the list here instead of assigning it kept
+                    // only the holes of the last interior element and silently dropped the rest.
+                    internalEdge3Ds ??= [];
 
                     XmlNodeList? xmlNodeList_LinearRing = xmlNode_Temp?.ChildNodes;
                     if (xmlNodeList_LinearRing != null)
