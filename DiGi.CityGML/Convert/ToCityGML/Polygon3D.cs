@@ -45,6 +45,11 @@ namespace DiGi.CityGML
                 }
             }
 
+            // A gml:LinearRing repeats its first position as its last, and a ring is stored open, so the repeat is
+            // dropped here where the node is known to be a ring. Doing it before the count is checked is what makes
+            // that check right: three positions describing two distinct corners is not a polygon and is rejected.
+            Geometry.Spatial.Modify.RemoveDuplicates(point3Ds, true);
+
             if (point3Ds == null || point3Ds.Count < 3)
             {
                 return null;
